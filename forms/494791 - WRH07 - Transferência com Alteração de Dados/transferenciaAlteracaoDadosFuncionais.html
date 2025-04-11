@@ -1,0 +1,1246 @@
+<html>
+	<head>
+		<link type="text/css" rel="stylesheet" href="/portal/resources/style-guide/css/fluig-style-guide.min.css"/>
+		<link type="text/css" rel="stylesheet" href="css_structure.css" />
+		<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+		<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+		<script type="text/javascript" src="/portal/resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+		<script type="text/javascript" src="jquery-maskmoney.js"></script>
+		<script type="text/javascript" src="util.js"></script>
+		<script type="text/javascript" src="atividades.js"></script>
+		<script type="text/javascript" src="customizado.js"></script>
+		<script type="text/javascript" src="zoom.js"></script>		
+	</head>
+	
+	<body>
+		<div class="fluig-style-guide">
+			<form name="form" role="form">
+				<div id="container-fluid">
+				
+					<input type="hidden" name="campoIdentificador">
+					<input type="hidden" name="idFluig">
+					<input type="hidden" name="chapaSolicitante">
+					<input type="hidden" name="codUsuario">				
+					<input type="hidden" name="matrSolicitante">	
+					<input type="hidden" name="cargoSolicitante">
+					<input type="hidden" name="funcaoSolicitante">
+					<input type="hidden" name="solicitanteRH">
+					
+					<input type="hidden" name="codColigadaOrigem">	
+					<input type="hidden" name="codCCObraSetorOrigem">	
+					<input type="hidden" name="matrAprovadorGerenteOrigem">
+					<input type="hidden" name="matrAprovadorDiretorOrigem">
+					<input type="hidden" name="matrAprovadorPresidOrigem">
+					<input type="hidden" name="codDPOrigem">
+					<input type="hidden" name="codRHOrigem">
+					<input type="hidden" name="codMedicinaOrigem">
+					<input type="hidden" name="codSegurancaOrigem">
+					<input type="hidden" name="codAdmOrigem">
+					<input type="hidden" name="tipoOrigem">
+					
+					<input type="hidden" name="codColigadaDestino">
+					<input type="hidden" name="codCCObraSetorDestino">
+					<input type="hidden" name="matrAprovadorGerenteDestino">
+					<input type="hidden" name="matrAprovadorDiretorDestino">
+					<input type="hidden" name="matrAprovadorPresidDestino">
+					<input type="hidden" name="codDPDestino">
+					<input type="hidden" name="codRHDestino">
+					<input type="hidden" name="codMedicinaDestino">
+					<input type="hidden" name="codSegurancaDestino">
+					<input type="hidden" name="codAdmDestino">
+					<input type="hidden" name="tipoDestino">
+					
+					<input type="hidden" name="resultadoExame">
+					<input type="hidden" name="idReq">
+					<input type="hidden" name="statusReq">
+					<input type="hidden" name="totalRateio" >
+					<input type="hidden" name="temAvalQuestionario">
+					
+					<input type="hidden" name="resultadoLaudoProva">
+					<input type="hidden" name="qtdAnexos">
+					<input type="hidden" name="hiddenfiltroCentroCustoProp">
+					
+					<input type="hidden" name="exigeAprovacaoSede">
+					<input type="hidden" name="atribuicaoGerSede">
+<!--					
+					<div class="panel panel-default cabecalho">
+						<div class="panel-body panel-heading">
+							<div class="row">					
+								<div class="text-center col-md-12" >
+									<h2 style="font-weight: bold;">i18n.translate("text.transferencia")</h2>
+								</div>		
+							</div>
+						</div>
+					</div>
+ -->					
+					<div class="panel panel-default dadosSolicitante">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.dadosSolicitante")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-6">
+									<label for="nomeSolicitante">i18n.translate("text.nomeSolicitante") </label> 
+									<input type="text" class="form-control" name="nomeSolicitante" readonly="readonly" />
+								</div>
+								<div class="col-md-6">
+									<label for="dataSolicitacao"> i18n.translate("text.dataSolicitacao") </label>
+									<input type="text" class="form-control" name="dataSolicitacao" id="dataSolicitacao" readonly="readonly" />
+								</div>	
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel panel-default dadosOrigem">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.dadosOrigem")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="obraSetorOrigem" class="required"> i18n.translate("text.obraSetorOrigem") </label> 
+									<input type="zoom" class="form-control" name="obraSetorOrigem" id="obraSetorOrigem" 
+										  data-zoom="{
+				                              'displayKey':'setorObra',
+				                              'datasetId':'ds_alcada_aprovacao',
+				                              'fields':[
+				                              {
+				                              'field':'setorObra',
+				                              'label':'Obra/Setor'
+				                              },
+				                              {
+				                              'field':'codAprovador',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codAprovadorDiretor',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codAprovadorPresid',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codCentroCusto',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codColigada',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codDP',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codMedicina',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codRH',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codSeguranca',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codAdm',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'processoAumentoQuadro',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'tipo',
+				                              'visible':'false'
+				                              }
+				                              ]}" />	
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-2">
+									<label for="chapa">i18n.translate("text.chapa") </label> 
+									<input type="text" class="form-control" name="chapa" readonly="readonly" />
+								</div>
+								<div class="col-md-10">
+									<label for="funcionario"> i18n.translate("text.nome") </label>
+									<input type="hidden" name="chapaFuncionario" id="chapaFuncionario"/>
+									<input type="hidden" name="codPessoaSolic" id="codPessoaSolic"/>
+									<input type="hidden" name="nomeFunc" id="nomeFunc"/>
+									<input type="hidden" name="gestao" id="gestao"/>
+									<input type="hidden" name="codTabSalarial" id="codTabSalarial"/>
+									<input type="hidden" name="faixaOrigem" id="faixaOrigem"/>
+									<input type="hidden" name="codSecao" id="codSecao"/>
+									<input type="hidden" name="estabilidade" id="estabilidade"/>
+									<input type="hidden" name="cargoFunc" id="cargoFunc"/>
+									<input type="zoom" class="form-control" name="funcionario" id="funcionario"
+											data-zoom="{
+						                              'displayKey':'NOMEFILTRO',
+						                              'datasetId':'ds_RM_retorna_dadosFuncionario',
+						                              'fields':[
+							                              {'field':'NOME', 'label':'Nome', 'standard':'true'},
+							                              {'field':'CHAPA', 'label':'Chapa'},
+							                              {'field':'FUNCAO', 'label':'Funcao'},
+							                              {'field':'NOMEFILTRO', 'visible':'false', 'standard':'true'},
+							                              {'field':'FERIASPROG', 'visible':'false'},
+							                              {'field':'CODSITUACAO', 'visible':'false'}
+						                              ]}" />
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">							
+								<div class="col-md-6">
+									<label for="secaoOrigem" class="required"> i18n.translate("text.secaoOrigem") </label> 
+									<input type="hidden" name="codSecaoOrigem" id="codSecaoOrigem" >		
+									<input type="hidden" name="subContratoOrigem" id="subContratoOrigem" >		
+									<input type="text" class="form-control" name="secaoOrigem" id="secaoOrigem" readonly="readonly">		
+								</div>
+								<div class="col-md-6">
+									<label for="filialOrigem" class="required"> i18n.translate("text.filialOrigem") </label> 
+									<input type="hidden" name="codFilialOrigem" id="codFilialOrigem" >		
+									<input type="text" class="form-control" name="filialOrigem" id="filialOrigem" readonly="readonly">		
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-2">
+									<label for="codFuncaoOrigem">i18n.translate("text.codFuncaoOrigem") </label> 
+									<input type="text" class="form-control" name="codFuncaoOrigem" readonly="readonly" />
+								</div>
+								<div class="col-md-6"> 
+									<label for="funcionario"> i18n.translate("text.funcaoOrigem") </label>
+									<input type="text" class="form-control" name="funcaoOrigem" readonly="readonly" />									
+								</div>
+								<div class="col-md-2">
+									<label for="nomeFaixaOrigem"> i18n.translate("text.faixa") </label>
+									<input type="text" class="form-control" name="nomeFaixaOrigem" readonly="readonly" />
+								</div>
+								<div class="col-md-2"> 
+									<label>i18n.translate("text.salarioOrigem") </label>
+									<div class="input-group">
+										<span class="input-group-addon sifrao">
+								            <span>R$</span>
+								        </span>
+										<input type="text" class="form-control" id="salarioOrigem" name="salarioOrigem" readonly="readonly"/>
+									</div>
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12 form-group">
+									<div>
+										<table class="table table-striped" 
+												noaddbutton="true" 
+												nodeletebutton="true"
+												tablename="tbRateioOrigem" 
+												name="tbRateioOrigem"
+												id="tbRateioOrigem">	
+											<thead>
+												<tr style="border-color: white; background-color: white;">	
+													<td style="border-color: white;" width="16%"><b>i18n.translate("text.codCentroCusto")</b></td>
+													<td style="border-color: white;" width="52%"><b>i18n.translate("text.centroCusto")</b></td>
+													<td style="border-color: white;" width="32%"><b>i18n.translate("text.porcentagem")</b></td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr style="border-color: white;">	
+													<td style="border-color: white;">
+														<input type="text" class="form-control" name="codCentroCustoOrigem" id="codCentroCustoOrigem" readonly="readonly">
+													</td>
+													<td style="border-color: white;">
+														<input type="text" class="form-control" name="centroCustoOrigem" id="centroCustoOrigem" readonly="readonly">													
+													</td>											
+													<td style="border-color: white;">														
+														<div class="input-group">										
+															<input type="text" class="form-control" name="percentualOrigem" id="percentualOrigem" readonly="readonly"/>
+															<span class="input-group-addon sifrao">
+													            <span>%</span>
+													        </span>
+													    </div>
+													</td>											
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-3">
+									<label for="dataAdmissao"> i18n.translate("text.dataAdmissao") </label> 
+									<input type="text" class="form-control" name="dataAdmissao" id="dataAdmissao" readonly="readonly"/>
+								</div>
+								<div class="col-md-3">
+									<label for="dataPromocao"> i18n.translate("text.dataPromocao") </label> 
+									<input type="text" class="form-control" name="dataPromocao" id="dataPromocao" readonly="readonly"/>
+								</div>
+								<div class="col-md-3">
+									<label for="absenteismoMedico"> i18n.translate("text.absenteismoMedico") </label> 
+									<input type="text" class="form-control" name="absenteismoMedico" id="absenteismoMedico" readonly="readonly"/>
+								</div>
+								<div class="col-md-3">
+									<label for="absenteismoProdutiv"> i18n.translate("text.absenteismoProdutiv") </label> 
+									<input type="text" class="form-control" name="absenteismoProdutiv" id="absenteismoProdutiv" readonly="readonly"/>
+								</div>
+							</div>
+						</div>							
+					</div>	
+				
+					<div class="panel panel-default dadosPropostos">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.dadosPropostos")
+							</h3>
+						</div>
+						<div class="panel-body">							
+							<div class="row">
+								<div class="col-md-4">
+									<label for="obraSetorDestino" class="required"> i18n.translate("text.obraSetorDestino") </label> 
+									<input type="zoom" class="form-control" name="obraSetorDestino" id="obraSetorDestino" 
+										  data-zoom="{
+				                              'displayKey':'setorObra',
+				                              'datasetId':'ds_alcada_aprovacao',
+				                              'fields':[
+				                              {
+				                              'field':'setorObra',
+				                              'label':'Obra/Setor'
+				                              },
+				                              {
+				                              'field':'codAprovador',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codAprovadorDiretor',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codAprovadorPresid',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codCentroCusto',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codColigada',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codDP',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codMedicina',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codRH',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codSeguranca',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'codAdm',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'processoAumentoQuadro',
+				                              'visible':'false'
+				                              },
+				                              {
+				                              'field':'tipo',
+				                              'visible':'false'
+				                              }
+				                              ]}" />	
+								</div>
+								<div class="col-md-4">
+									<label for="secaoDestino" class="required"> i18n.translate("text.secaoDestino") </label> 
+									<input type="hidden" name="subContratoDestino" id="subContratoDestino" >	
+									<input type="hidden" name="codSecaoDestino" id="codSecaoDestino" />									
+									<input type="zoom" class="form-control" name="secaoDestino" id="secaoDestino"
+										  data-zoom="{
+					                              'displayKey':'DESCRICAO',
+					                              'datasetId':'ds_RM_retorna_secaoDestino',
+					                              'fields':[
+					                              {
+					                              'field':'CODIGO',
+					                              'label':'C\u00f3digo'
+					                              },{
+					                              'field':'DESCRICAO',
+					                              'label':'Nome'
+					                              },
+					                              {
+					                              'field':'CODCOLIGADA',
+					                              'visible':'false'
+					                              },
+					                              {
+					                              'field':'CODFILIAL',
+					                              'visible':'false'
+					                              },
+					                              {
+					                              'field':'CODSECAO',
+					                              'visible':'false'
+					                              }
+					                              ]
+					                              }" />			
+								</div>
+								<div class="col-md-4">
+									<label for="filialDestino" class="required"> i18n.translate("text.filialDestino") </label>
+									<input type="hidden" name="codFilialDestino" id="codFilialDestino"> 
+									<input type="text" class="form-control" name="filialDestino" id="filialDestino" readonly="readonly">
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-2">
+									<label for="codFuncaoProposto">i18n.translate("text.codFuncaoProposto") </label> 
+									<input type="text" class="form-control" name="codFuncaoProposto" readonly="readonly" />
+								</div>
+								<div class="col-md-6"> 
+									<label for="funcaoProposto"> i18n.translate("text.funcaoProposto") </label>
+									<input type="hidden" name="funcGestaoDestino" id="funcGestaoDestino">
+									<input type="hidden" name="cargoProposto" id="cargoProposto"/>
+									<input type="hidden" name="cargoPropostoTipoMO" id="cargoPropostoTipoMO"/>
+									<input type="zoom" class="form-control" name="funcaoProposto" id="funcaoProposto"
+										  data-zoom="{
+					                              'displayKey':'FUNCAO',
+					                              'datasetId':'ds_Corpore_VwMIP_FLUIG_PFUNCAO',
+					                              'fields':[
+						                              {'field':'CODIGO', 'label':'C\u00f3digo'},
+						                              {'field':'FUNCAO', 'label':'Nome', 'standard':'true'},
+						                              {'field':'CODCOLIGADA', 'visible':'false'},
+						                              {'field':'GESTAO', 'visible':'false'},
+						                              {'field':'CARGO', 'visible':'false'},
+						                              {'field':'TIPOMO','visible':'false'}
+					                              ]
+					                              }" />	
+								</div>
+								<div class="col-md-2">
+									<label>i18n.translate("text.faixa")</label>
+									<input type="zoom" class="form-control" name="nomeFaixaProposto" id="nomeFaixaProposto"
+										  data-zoom="{
+					                              'displayKey':'NOMEFAIXA',
+					                              'datasetId':'ds_RM_retorna_salario',
+					                              'fields':[
+						                              {'field':'CODFAIXA', 'visible':'false'},
+						                              {'field':'NOMEFAIXA', 'label':'Faixa Salarial'},
+						                              {'field':'SALARIO_BR', 'label':'Salário'},
+						                              {'field':'SALARIO', 'visible':'false'}
+					                              ]
+					                              }" />
+					                 <input type="hidden" name="codFaixaProposto" id="codFaixaProposto" />
+					                 <input type="hidden" name="codTabelaProposto" id="codTabelaProposto" />
+								</div>
+								<div class="col-md-2"> 
+									<label>i18n.translate("text.salarioProposto") </label> 
+									<div class="input-group">
+										<span class="input-group-addon sifrao">
+								            <span>R$</span>
+								        </span>
+										<input type="text" class="form-control" id="salarioProposto" name="salarioProposto" readonly="readonly" />
+									</div>
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12 form-group">
+									<div>
+										<table class="table table-striped" 
+												noaddbutton="true" 
+												nodeletebutton="true"
+												tablename="tbRateioProp" 
+												name="tbRateioProp"
+												id="tbRateioProp">	
+											<thead>
+												<tr style="border-color: white; background-color: white;">	
+													<td style="border-color: white;" class="removerLinhaLixeira"width="5%"><b></b></td>	
+													<td style="border-color: white;" width="16%"><b>i18n.translate("text.codCentroCusto")</b></td>
+													<td style="border-color: white;" width="52%"><b>i18n.translate("text.centroCusto")</b>&nbsp;&nbsp;&nbsp;&nbsp;
+														<label class="checkbox-inline filtroCentroCustoProp">
+															<input type="checkbox" name="filtroCentroCustoProp" id="filtroCentroCustoProp" checked />i18n.translate("text.filtroCentroCustoProp")
+														</label>
+													</td>
+													<td style="border-color: white;" width="32%"><b>i18n.translate("text.porcentagem")</b></td>
+												</tr>
+											</thead>
+											<tbody>
+												<tr style="border-color: white;">	
+													<td style="border-color: white;" class="colunaLixeira">
+														<input type="image" src="lixeira.png" name="btDeleteRateio" class="btDeleteRateio"
+															id="btDeleteRateio" onmouseover="this.style.cursor='hand'" style="cursor: pointer; padding: 5px 0 0 5px;" onclick='fnCustomDelete(this);' />										
+													</td>
+													<td style="border-color: white;">
+														<input type="text" class="form-control" name="codCentroCustoProp" id="codCentroCustoProp" readonly="readonly">
+													</td>
+													<td style="border-color: white;">
+														<input type="zoom" name="centroCustoProp" id="centroCustoProp" class="form-control"
+																data-zoom="{
+																        'displayKey':'COMPLETO',
+																        'datasetId':'ds_RM_retorna_centroCustoRateio',
+																        'fields':[
+																            {
+																               'field':'CODCCUSTO',
+																               'label':'C&oacute;digo',
+																               'visible':'false'
+																            },{
+																              'field':'NOME',
+																              'label':'Nome',
+																              'visible':'false'
+																            },{
+																              'field':'COMPLETO',
+																              'label':'Centro de Custo',
+																              'standard':'true'
+																            }
+																        ]
+																     }" />														
+													</td>											
+													<td style="border-color: white;">
+														<div class="input-group">										
+															<input type="text" class="form-control" name="percentProp" id="percentProp" onkeyup="somenteNumeros(this);" onchange="validarTotalRateio();" maxlength="3" />
+															<span class="input-group-addon sifrao">
+													            <span>%</span>
+													        </span>
+													    </div>
+													</td>											
+												</tr>
+											</tbody>
+										</table>
+										<div>
+											<button type="button" id="botaoAddRateio" class="btn btn-primary" name="botaoAddRateio" onclick="aberturaRateio();">Adicionar Rateio</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<!-- <div class="col-md-4">
+									<label for="substituicao"> i18n.translate("text.substituicao") </label>
+									<div class="substituicao">
+									    <label><input type="radio" name="substituicao" id="sim" value="1">i18n.translate("text.sim")</label>
+									    <label><input type="radio" name="substituicao" id="nao" value="0">i18n.translate("text.nao")</label>
+									</div>	
+								</div> -->
+								<div class="col-md-2">
+									<label for="variacaoSalario"> i18n.translate("text.variacaoSalario") </label> 
+									<input type="text" class="form-control" name="variacaoSalario" id="variacaoSalario" readonly="readonly"/>
+								</div>
+								<div class="col-md-2">
+									<label for="dataAlteracao"> i18n.translate("text.dataAlteracao") </label> 
+									<input type="text" class="form-control" name="dataAlteracao" id="dataAlteracao" onblur="validaDataAlteracao(this);"/>
+								</div>
+								<div class="col-md-2">
+									<label for="notaProvaTecnica"> i18n.translate("text.notaProvaTecnica") </label> 
+									<input type="text" class="form-control" name="notaProvaTecnica" id="notaProvaTecnica" readonly="readonly"/>
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12 alert alert-info">
+							    	 	Solicitações realizadas ou aprovadas entre os dias 23 e 31 serão processadas somente na competência seguinte.
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-4">
+									<label for="exigeLaudo">i18n.translate("text.exigeLaudo") </label> 
+									<input type="text" class="form-control" name="exigeLaudo" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="laudo"> i18n.translate("text.laudo") </label>
+									<input type="text" class="form-control" name="laudo" readonly="readonly" />
+								</div>
+								<div class="col-md-4">	
+									<label for="laudoApto"> i18n.translate("text.laudoApto") </label>
+									<input type="text" class="form-control" name="laudoApto" readonly="readonly" />
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-4 motMudancaFuncao"> 
+									<label for="motMudancaFuncao"> i18n.translate("text.motMudancaFuncao") </label>
+									<input type="hidden" name="codMotMudancaFuncao" id="codMotMudancaFuncao" />
+									<input type="zoom" class="form-control" name="motMudancaFuncao" id="motMudancaFuncao"
+										  data-zoom="{
+					                              'displayKey':'MOTFUNCAO',
+					                              'datasetId':'ds_RM_retorna_motivoMudancaFuncao',
+					                              'fields':[
+					                              {
+					                              'field':'CODMOTFUNCAO',
+					                              'label':'C\u00f3digo'
+					                              },{
+					                              'field':'MOTFUNCAO',
+					                              'label':'Nome'
+					                              }									                              
+					                              ]
+					                              }" />	
+								</div>
+								<div class="col-md-4 motMudancaSalarial"> 
+									<label for="motMudancaSalarial"> i18n.translate("text.motMudancaSalarial") </label>
+									<input type="hidden" name="codMotMudancaSalarial" id="codMotMudancaSalarial" />
+									<input type="zoom" class="form-control" name="motMudancaSalarial" id="motMudancaSalarial"
+										  data-zoom="{
+					                              'displayKey':'MOTSAL',
+					                              'datasetId':'ds_RM_retorna_motivoMudancaSalarial',
+					                              'fields':[
+					                              {
+					                              'field':'CODMOTSAL',
+					                              'label':'C\u00f3digo'
+					                              },{
+					                              'field':'MOTSAL',
+					                              'label':'Nome'
+					                              }								                              
+					                              ]
+					                              }" />	
+								</div>
+								<div class="col-md-4"> 
+									<label for="motMudancaSecao"> i18n.translate("text.motMudancaSecao") </label>
+									<input type="hidden" name="codMotMudancaSecao" id="codMotMudancaSecao" />
+									<input type="zoom" class="form-control" name="motMudancaSecao" id="motMudancaSecao"
+										  data-zoom="{
+					                              'displayKey':'MOTSECAO',
+					                              'datasetId':'ds_RM_retorna_motivoMudancaSecao',
+					                              'fields':[
+					                              {
+					                              'field':'CODMOTSECAO',
+					                              'label':'C\u00f3digo'
+					                              },{
+					                              'field':'MOTSECAO',
+					                              'label':'Nome'
+					                              }								                              
+					                              ]
+					                              }" />	
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label for="justificativa"> i18n.translate("text.justificativa") </label> 
+									<textarea class="form-control" name="justificativa"></textarea>
+								</div>																								
+							</div>
+							<div class="row fs-xs-padding-vertical justAbsMed">
+								<div class="col-md-12">
+									<label for="justAbsMed"> i18n.translate("text.justAbsMed") </label> 
+									<textarea class="form-control" name="justAbsMed"></textarea>
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical justAbsPro">
+								<div class="col-md-12">
+									<label for="justAbsPro"> i18n.translate("text.justAbsPro") </label> 
+									<textarea class="form-control" name="justAbsPro"></textarea>
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical justPrazo">
+								<div class="col-md-12">
+									<label for="justPrazo"> i18n.translate("text.justPrazo") </label>
+									<textarea class="form-control" name="justPrazo"></textarea>
+								</div>
+							</div>							
+						</div>
+					</div>
+					
+					<div class="panel panel-default avaliacao" id="avaliacao">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">i18n.translate("text.avaliacao")</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4 motivoDemissaoRM">
+									<label for="motivoDemissaoRM"> i18n.translate("text.motivoDemissao") </label>
+									<select class="form-control" name="motivoDemissaoRM" onchange="changeMotivDeslig();" readonly="readonly">
+										<option value="">i18n.translate("text.selecione")</option>
+										<!-- <option value="0">i18n.translate("text.reducaoEfetivo")</option>
+										<option value="1">i18n.translate("text.finalObra")</option> -->
+										<option value="2">i18n.translate("text.transferenciaObras")</option>
+										<!-- <option value="3">Iniciativa da MIP - Justa Causa</option>
+										<option value="4">i18n.translate("text.quebraRegraOuro")</option>
+										<option value="5">i18n.translate("text.baixoDesempenho")</option>
+										<option value="6">i18n.translate("text.pediuDemissao")</option>
+										<option value="7">i18n.translate("text.forcarDemissao")</option>
+										<option value="8">i18n.translate("text.pediuPraSerDemitido")</option>
+										<option value="9">i18n.translate("text.falecimento")</option>
+										<option value="10">i18n.translate("text.terminoContrato")</option>
+										<option value="11">i18n.translate("text.naoAtendeNormas")</option>
+										<option value="12">i18n.translate("text.decisaoJudicial")</option> -->
+									</select>
+								</div>	
+								<div class="col-md-8">
+									<label for="ativo"> i18n.translate("text.restricoes") </label>
+									<input type="hidden" name="validaResticao" value="false"/>
+									<input type="hidden" name="semRestr" value="0"/>
+									<br><input type="checkbox" class="restricoes" name="semRestricao" onchange="changeRestricoes();" />i18n.translate("text.semRestricao")
+									 <input type="hidden" name="hiddenSemRestricao">
+									<br><input type="checkbox" class="restricoes" name="justaCausa" onchange="changeRestricoes();" />i18n.translate("text.justaCausa")
+									 <input type="hidden" name="hiddenJustaCausa">
+									<br><input type="checkbox" class="restricoes" name="regraDeOuro" onchange="changeRestricoes();" />i18n.translate("text.regraDeOuro")
+									 <input type="hidden" name="hiddenRegraDeOuro">
+									<br><input type="checkbox" class="restricoes" name="assiduidade" onchange="changeRestricoes();"/>i18n.translate("text.assiduidade")
+									 <input type="hidden" name="hiddenAssiduidade">
+									<br><input type="checkbox" class="restricoes" name="pontualidade" onchange="changeRestricoes();"/>i18n.translate("text.pontualidade")
+									 <input type="hidden" name="hiddenPontualidade">
+									<br><input type="checkbox" class="restricoes" name="produtividade" onchange="changeRestricoes();"/>i18n.translate("text.produtividade")
+									 <input type="hidden" name="hiddenProdutividade">
+									<br><input type="checkbox" class="restricoes" name="comprometimento" onchange="changeRestricoes();"/>i18n.translate("text.comprometimento")
+									 <input type="hidden" name="hiddenComprometimento">
+									<br><input type="checkbox" class="restricoes" name="indisciplina" onchange="changeRestricoes();"/>i18n.translate("text.indisciplina")
+									 <input type="hidden" name="hiddenIndisciplina">
+									<br><input type="checkbox" class="restricoes" name="seguranca" onchange="changeRestricoes();"/>i18n.translate("text.seguranca")
+									 <input type="hidden" name="hiddenSeguranca">
+								</div>	
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label for="descRestricoes"> i18n.translate("text.descRestricoes") </label>
+									<textarea class="form-control" name="descRestricoes" id="descRestricoes"></textarea>
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-4">
+									<label for="difPositivo"> i18n.translate("text.difPositivo") </label>
+									<div class="difPositivo">
+									    <label><input type="radio" name="difPositivo" id="sim" value="sim">i18n.translate("text.sim")</label>
+									    <label><input type="radio" name="difPositivo" id="nao" value="nao">i18n.translate("text.nao")</label>
+									</div>	
+								</div>								
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label for="descDifPositivo"> i18n.translate("text.descDifPositivo") </label>
+									<textarea class="form-control" name="descDifPositivo" id="descDifPositivo"></textarea>
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical perguntas">
+								<div class="col-md-12 form-group">
+									<table  class=" fs-no-border table table-striped"
+										tablename="tbAvaliacao" noaddbutton="true"
+										name="tbAvaliacao" nodeletebutton="true"
+										id="tbAvaliacao"
+										customfndelete="fnCustomDelete(this, 'tbAvaliacao')">
+										<thead>
+											<tr>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+													<div class="row">															
+														
+														<div class="col-md-9">
+															<label for="perguntas">i18n.translate("text.questao")</label>
+															<textarea class="form-control" rows="4" name="perguntas" id="perguntas" readonly="readonly"> </textarea>
+															<input type="hidden" name="codQuestionario" id="codQuestionario">
+															<input type="hidden" name="codQuestao" id="codQuestao">
+															<input type="hidden" name="validaAvaliacao" id="validaAvaliacao">
+														</div>
+															
+														<div class="col-md-2">
+															<label> i18n.translate("text.resposta")</label> 
+															<select class="form-control" name="valorAvaliacao" onchange="validaAvaliacao(this);">
+																<option value="">i18n.translate("text.selecione")</option>
+																<option value="1">i18n.translate("text.25")</option>
+																<option value="2">i18n.translate("text.50")</option>
+																<option value="3">i18n.translate("text.75")</option>
+																<option value="4">i18n.translate("text.100")</option>
+															</select>
+														</div>
+														
+														<div class="col-md-1 removerLinhaLixeira" id="divLixeira" > 
+															<label></label> 
+															<input type="button" name="btDeletePerguntas" id="btDeletePerguntas" class="btDeletePerguntas" onclick='fnCustomDelete(this);'/>
+														</div>							
+													</div>						
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>						
+						</div>
+					</div>
+										
+					<div class="panel panel-default aprovacaoTransferencia">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.aprovacaoTransferencia")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="nomeAprovadorTransferencia">i18n.translate("text.nomeAprovador") </label> 
+									<input type="text" class="form-control" name="nomeAprovadorTransferencia" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="dataAprovacaoTransferencia"> i18n.translate("text.dataAprovacao") </label>
+									<input type="text" class="form-control" name="dataAprovacaoTransferencia" id="dataAprovacaoTransferencia" readonly="readonly" /> 
+								</div>
+								<div class="col-md-4">	
+									<label for="aprovacaoTransferencia"> i18n.translate("text.aprovado") </label>								
+									<select name="aprovacaoTransferencia" class="form-control">
+										<option value="">i18n.translate("text.selecionar")</option>
+										<option value="sim">i18n.translate("text.sim")</option>
+										<option value="nao">i18n.translate("text.nao")</option>
+									</select>
+									<input type="hidden" name="hiddenAprovacaoTransferencia" />
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="justificativaTransferencia"> i18n.translate("text.justificativa") </label>
+									<textarea class="form-control" name="justificativaTransferencia"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel panel-default aprovacaoTestes">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.aprovacaoTestes")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="nomeAprovadorTestes">i18n.translate("text.responsavel") </label> 
+									<input type="text" class="form-control" name="nomeAprovadorTestes" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="dataAprovacaoTestes"> i18n.translate("text.data") </label>
+									<input type="text" class="form-control" name="dataAprovacaoTestes" id="dataAprovacaoTestes" readonly="readonly" /> 
+								</div>
+								<div class="col-md-4">	
+									<label for="aprovacaoTestes"> i18n.translate("text.testesRealizados") </label>
+									<select name="aprovacaoTestes" class="form-control">
+										<option value="">i18n.translate("text.selecionar")</option>
+										<option value="sim">i18n.translate("text.sim")</option>
+										<option value="nao">i18n.translate("text.naoTestes")</option>
+									</select>
+									<input type="hidden" name="hiddenAprovacaoTestes" />
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="observacoesTestes"> i18n.translate("text.observacoes") </label>
+									<textarea class="form-control" name="observacoesTestes"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel panel-default aprovacaoGerSede">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.aprovacaoGerSede")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-4">
+									<label for="nomeGerSede">i18n.translate("text.nomeGerSede") </label> 
+									<input type="text" class="form-control" name="nomeGerSede" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="dataGerSede"> i18n.translate("text.dataGerSede") </label>
+									<input type="text" class="form-control" name="dataGerSede" id="dataGerSede" readonly="readonly" /> 
+								</div>
+								<div class="col-md-4">	
+									<label for="aprovacaoGerSede"> i18n.translate("text.aprovado") </label>								
+									<select name="aprovacaoGerSede" class="form-control">
+										<option value="">i18n.translate("text.selecionar")</option>
+										<option value="sim">i18n.translate("text.sim")</option>
+										<option value="nao">i18n.translate("text.nao")</option>
+									</select>
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="justificativaGerSede"> i18n.translate("text.justificativa") </label>
+									<textarea class="form-control" name="justificativaGerSede"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="panel panel-default aprovacaoTestesValida">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.aprovacaoTestesValida")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="nomeAprovadorTestesValida">i18n.translate("text.responsavel") </label> 
+									<input type="text" class="form-control" name="nomeAprovadorTestesValida" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="dataAprovTestesValida"> i18n.translate("text.data") </label>
+									<input type="text" class="form-control" name="dataAprovTestesValida" id="dataAprovTestesValida" readonly="readonly" /> 
+								</div>
+								<div class="col-md-4">	
+									<label for="aprovTestesValida"> i18n.translate("text.testesAprovados") </label>								
+									<select name="aprovTestesValida" class="form-control">
+										<option value="">i18n.translate("text.selecionar")</option>
+										<option value="sim">i18n.translate("text.sim")</option>
+										<option value="nao">i18n.translate("text.nao")</option>
+									</select>
+									<input type="hidden" name="hiddenAprovTestesValida" />
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="observacoesTestesValida"> i18n.translate("text.observacoes") </label>
+									<textarea class="form-control" name="observacoesTestesValida"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel panel-default aceitarTransf">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.aceitarTransf")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="nomeAprovador">i18n.translate("text.nomeAprovador") </label> 
+									<input type="text" class="form-control" name="nomeAceitarTransf" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="dataAprov"> i18n.translate("text.dataAprovacao") </label>
+									<input type="text" class="form-control" name="dataAceitarTransf" id="dataAprov" readonly="readonly" /> 
+								</div>
+								<div class="col-md-4">	
+									<label for="aceitarTransf"> i18n.translate("text.aceita") </label>								
+									<select name="aceitarTransf" class="form-control">
+										<option value="">i18n.translate("text.selecionar")</option>
+										<option value="sim">i18n.translate("text.sim")</option>
+										<option value="nao">i18n.translate("text.nao")</option>
+									</select>
+									<input type="hidden" name="hdnAceitarTransf" />
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="obsAceitarTransf"> i18n.translate("text.justificativa") </label>
+									<textarea class="form-control" name="obsAceitarTransf"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel panel-default aprovacaoDiretoria">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.aprovacaoDiretoria")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="nomeAprovadorDiretoria">i18n.translate("text.nomeAprovador") </label> 
+									<input type="text" class="form-control" name="nomeAprovadorDiretoria" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="dataAprovDiretoria"> i18n.translate("text.dataAprovacao") </label>
+									<input type="text" class="form-control" name="dataAprovDiretoria" id="dataAprovDiretoria" readonly="readonly" /> 
+								</div>
+								<div class="col-md-4">	
+									<label for="aprovDiretoria"> i18n.translate("text.aprovado") </label>								
+									<select name="aprovDiretoria" class="form-control">
+										<option value="">i18n.translate("text.selecionar")</option>
+										<option value="sim">i18n.translate("text.sim")</option>
+										<option value="nao">i18n.translate("text.nao")</option>
+									</select>
+									<input type="hidden" name="hiddenAprovDiretoria" />
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="observacoesDiretoria"> i18n.translate("text.justificativa") </label>
+									<textarea class="form-control" name="observacoesDiretoria"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel panel-default aceitarTransfDiretoria">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.aceitarTransfDiretoria")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="nomeAprovadorDiretoria">i18n.translate("text.nomeAprovador") </label> 
+									<input type="text" class="form-control" name="nomeAceitarTransfDiretoria" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="dataAprovDiretoria"> i18n.translate("text.dataAprovacao") </label>
+									<input type="text" class="form-control" name="dataAceitarTransfDiretoria" id="dataAceitarTransfDiretoria" readonly="readonly" /> 
+								</div>
+								<div class="col-md-4">	
+									<label for="aceitarTransfDiretoria"> i18n.translate("text.aceita") </label>								
+									<select name="aceitarTransfDiretoria" class="form-control">
+										<option value="">i18n.translate("text.selecionar")</option>
+										<option value="sim">i18n.translate("text.sim")</option>
+										<option value="nao">i18n.translate("text.nao")</option>
+									</select>
+									<input type="hidden" name="hdnAceitarTransfDiretoria" />
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="obsAceitarTransfDiretoria"> i18n.translate("text.justificativa") </label>
+									<textarea class="form-control" name="obsAceitarTransfDiretoria"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+								
+					<div class="panel panel-default aprovacaoPresidente">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.aprovacaoPresidente")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="nomeAprovadorPresidente">i18n.translate("text.nomeAprovador") </label> 
+									<input type="text" class="form-control" name="nomeAprovadorPresidente" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="dataAprovPresidente"> i18n.translate("text.dataAprovacao") </label>
+									<input type="text" class="form-control" name="dataAprovPresidente" id="dataAprovPresidente" readonly="readonly" /> 
+								</div>
+								<div class="col-md-4">	
+									<label for="aprovPresidente"> i18n.translate("text.aprovado") </label>								
+									<select name="aprovPresidente" class="form-control">
+										<option value="">i18n.translate("text.selecionar")</option>
+										<option value="sim">i18n.translate("text.sim")</option>
+										<option value="nao">i18n.translate("text.nao")</option>
+									</select>
+									<input type="hidden" name="hiddenAprovPresidente" />
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="observacoesPresidente"> i18n.translate("text.justificativa") </label>
+									<textarea class="form-control" name="observacoesPresidente"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel panel-default aprovacaoExames">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.aprovacaoExames")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-3">
+									<label for="nomeAprovadorExames">i18n.translate("text.responsavel") </label> 
+									<input type="text" class="form-control" name="nomeAprovadorExames" readonly="readonly" />
+								</div>
+								<div class="col-md-3">
+									<label for="dataAprovExames"> i18n.translate("text.data") </label>
+									<input type="text" class="form-control" name="dataAprovExames" id="dataAprovExames" readonly="readonly" /> 
+								</div>
+								<div class="col-md-3">
+									<label for="resultadoExames"> i18n.translate("text.resultadoExames") </label>
+									<input type="text" class="form-control" name="resultadoExames" id="resultadoExames" readonly="readonly" /> 
+								</div>
+								<div class="col-md-3">	
+									<label for="aprovExames"> i18n.translate("text.examesRealizados") </label>								
+									<select name="aprovExames" class="form-control">
+										<option value="">i18n.translate("text.selecionar")</option>
+										<option value="sim">i18n.translate("text.sim")</option>
+										<option value="naoSeAplica">i18n.translate("text.naoSeAplica")</option>
+									</select>
+									<input type="hidden" name="hiddenAprovExames" />
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="observacoesExames"> i18n.translate("text.observacoes") </label>
+									<textarea class="form-control" name="observacoesExames"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel panel-default validarDadosObra">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.validarDadosObra")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="nomeValidDadosObra">i18n.translate("text.responsavel") </label> 
+									<input type="text" class="form-control" name="nomeValidDadosObra" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="dataValidDadosObra"> i18n.translate("text.data") </label>
+									<input type="text" class="form-control" name="dataValidDadosObra" id="dataValidDadosObra" readonly="readonly" /> 
+								</div>
+								<div class="col-md-4">	
+									<label for="aprovValidDadosObra"> i18n.translate("text.dadosConferidos") </label>								
+									<select name="aprovValidDadosObra" class="form-control">
+										<option value="">i18n.translate("text.selecionar")</option>
+										<option value="sim">i18n.translate("text.sim")</option>
+										<option value="nao">i18n.translate("text.nao")</option>
+									</select>
+									<input type="hidden" name="hiddenValidDadosObra" />
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="observacoesValidDadosObra"> i18n.translate("text.observacoes") </label>
+									<textarea class="form-control" name="observacoesValidDadosObra"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="panel panel-default validarSalario">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.validarSalario")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-12 alert alert-info">
+							    	<b>Atenção: </b>Para evitar que o salário do funcionário fique desatualizado na Requisição do TOTVS RM, execute esta etapa (Validar Salário) no dia que o processo for efetivado. 
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-4">
+									<label for="nomeValidarSalario">i18n.translate("text.responsavel") </label> 
+									<input type="text" class="form-control" name="nomeValidarSalario" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="dataValidarSalario"> i18n.translate("text.data") </label>
+									<input type="text" class="form-control" name="dataValidarSalario" id="dataValidarSalario" readonly="readonly" /> 
+								</div>
+								<div class="col-md-4">	
+									<label for="aprovValidarSalario"> i18n.translate("text.aprovValidarSalario") </label>								
+									<select name="aprovValidarSalario" class="form-control">
+										<option value="">i18n.translate("text.selecionar")</option>
+										<option value="sim">i18n.translate("text.sim")</option>
+										<option value="nao">i18n.translate("text.naoCancelar")</option>
+									</select>
+								</div>
+							</div>							
+							<div class="row fs-xs-padding-vertical">								
+								<div class="col-md-4">
+									<label for="salarioAtual"> i18n.translate("text.salarioAtual") </label>
+									<div class="input-group">
+										<span class="input-group-addon sifrao">
+								            <span>R$</span>
+								        </span>
+										<input type="text" class="form-control" name="salarioAtual" id="salarioAtual" readonly="readonly" />
+									</div>									 
+								</div>
+								<div class="col-md-4">
+									<label for="salarioTabela">i18n.translate("text.salarioTabela") </label>
+									<div class="input-group">
+										<span class="input-group-addon sifrao">
+								            <span>R$</span>
+								        </span>
+										<input type="text" class="form-control" name="salarioTabela" id="salarioTabela" readonly="readonly" />
+									</div>
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="obsValidarSalario"> i18n.translate("text.observacoes") </label>
+									<textarea class="form-control" name="obsValidarSalario"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel panel-default efetivar">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.efetivar")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="nomeEfetivar">i18n.translate("text.responsavel") </label> 
+									<input type="text" class="form-control" name="nomeEfetivar" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="dataEfetivar"> i18n.translate("text.data") </label>
+									<input type="text" class="form-control" name="dataEfetivar" id="dataEfetivar" readonly="readonly" /> 
+								</div>
+								<div class="col-md-4">
+									<label for="alteracaoEfetivada"> i18n.translate("text.alteracaoEfetivada") </label>
+									<input type="text" class="form-control" name="alteracaoEfetivada" id="alteracaoEfetivada" readonly="readonly" /> 
+								</div>								
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="observacoesEfetivar"> i18n.translate("text.observacoes") </label>
+									<textarea class="form-control" name="observacoesEfetivar"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="panel panel-default atualizarCadastro">
+						<div class="panel-heading">
+							<h3 class="panel-title" style="font-weight: bold;">
+								i18n.translate("text.atualizarCadastro")
+							</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<label for="nomeAtualizarCadastro">i18n.translate("text.responsavel") </label> 
+									<input type="text" class="form-control" name="nomeAtualizarCadastro" readonly="readonly" />
+								</div>
+								<div class="col-md-4">
+									<label for="dataAtualizarCadastro"> i18n.translate("text.data") </label>
+									<input type="text" class="form-control" name="dataAtualizarCadastro" id="dataAtualizarCadastro" readonly="readonly" /> 
+								</div>
+								<div class="col-md-4">	
+									<label for="atualizarCadastro"> i18n.translate("text.atualizado") </label>								
+									<select name="atualizarCadastro" class="form-control">
+										<option value="">i18n.translate("text.selecionar")</option>
+										<option value="sim">i18n.translate("text.sim")</option>
+										<option value="nao">i18n.translate("text.nao")</option>
+									</select>
+									<input type="hidden" name="hiddenAtualizarCadastro" />
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="checklist"> i18n.translate("text.checklist") </label>
+								</div>
+							</div>
+							<div class="row fs-xs-padding-vertical">
+								<div class="col-md-12">
+									<label id="obsAtualizarCadastro"> i18n.translate("text.observacoes") </label>
+									<textarea class="form-control" name="obsAtualizarCadastro"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+									
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

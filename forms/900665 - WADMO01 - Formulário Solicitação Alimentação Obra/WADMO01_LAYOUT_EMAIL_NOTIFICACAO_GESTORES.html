@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>VOUCHER DA SOLICITAÇÃO DE ALIMENTAÇÃO</title>
+
+    <style type="text/css">
+      .ExternalClass {width:100%;} /* Força o Hotmail a exibir o email com a largura total */
+      .ExternalClass, .ExternalClass td {line-height: 100%;} /* Força o Hotmail a exibir o espaçamento normal entre linhas */
+      table {border-collapse: collapse; mso-table-lspace:0pt; mso-table-rspace:0pt; } /* Remove o espaçamento entorno das tabelas no Outlook 07, 10 */
+      table td {border-collapse: collapse;} /* Corrige o padding no Outlook 07, 10 */
+      td {margin: 0; padding: 0; font-size: 0px; line-height: 0px;} /* Zera os espaçamentos */
+      img {display: block; max-width: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic;}
+	  .cabecalho {background: #BDBDBD; /* Linhas com fundo cinza */}
+	  .dados {background: #F2F2F2; /* Linhas com fundo cinza */}
+  </style>
+</head>
+<body>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+    <tr>
+      <th width="100%">
+   		 <img src="${SERVER_URL!''}/globalmailsender/mailSenderHeader?tenantId=${TENANT_ID!''}">
+      </th>
+      </tr>
+  </table>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+    <tr>
+    <th width="100%"><h1>VOUCHER DA SOLICITAÇÃO DE ALIMENTAÇÃO</h1></th>
+    </tr>
+  </table>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" align="left">
+    <tr>
+    <th width="100%"><h3>DADOS SOLICITANTE</h3></th>
+    </tr>
+  </table>
+  <table width="100%" border="1px" cellpadding="5px" cellspacing="0" ID="alter" align="center" class='DadosProcesso'>
+    <tr> 
+		<th class='cabecalho' width="25%">Empresa</th>
+		<th class='cabecalho' width="25%">Filial</th>
+		<th class='cabecalho' width="25%">Data Voucher</th>
+		<th class='cabecalho' width="25%">Solicitação</th>
+	</tr>
+    <tr>
+		<th class='dados' width="25%">${EMPRESA}</th>
+		<th class='dados' width="25%">${FILIAL}</th>
+		<th class='dados' width="25%">${DATA_VOUCHER}</th>
+		<th class='dados' width="25%">${NUMERO_SOLICITACAO}</th>
+    </tr>
+  </table>
+   <table width="100%" border="1px" cellpadding="5px" cellspacing="0" ID="alter2" align="center" class='DadosProcesso'>
+    <tr> 
+		<th class='cabecalho' width="25%">Obra</th>
+		<th class='cabecalho' width="25%">Solicitante</th>
+		<th class='cabecalho' width="25%">Contato</th>
+		<th class='cabecalho' width="25%">E-mail</th>
+	</tr>
+    <tr>
+		<th class='dados' width="25%">${OBRA}</th>
+		<th class='dados' width="25%">${SOLICITANTE}</th>
+		<th class='dados' width="25%">${CONTATO_SOLICITANTE}</th>
+		<th class='dados' width="25%">${EMAIL_SOLICITANTE}</th>
+    </tr>
+  </table>
+  <table width="100%" border="1px" cellpadding="5px" cellspacing="0" ID="alter2" align="center" class='DadosProcesso'>
+    <tr> 
+		<th class='cabecalho' width="25%">Valor Desconto</th>
+		<th class='cabecalho' width="25%">Valor Acréscimo</th>
+		<th class='cabecalho' width="25%"></th>
+		<th class='cabecalho' width="25%"></th>
+	</tr>
+    <tr>
+		<th class='dados' width="25%">${VLR_DESCONTO}</th>
+		<th class='dados' width="25%">${VLR_ACRESCIMO}</th>
+		<th class='dados' width="25%"></th>
+		<th class='dados' width="25%"></th>
+    </tr>
+  </table>
+  <br>
+   <table width="100%" cellpadding="0" cellspacing="0" border="0" align="left">
+    <tr>
+    <th width="100%"><h3>DADOS FORNECEDOR</h3></th>
+    </tr>
+  </table>
+  <table width="100%" border="1px" cellpadding="5px" cellspacing="0" ID="alter2" align="center" class='DadosFornecedor'>
+    <tr> 
+		<th class='cabecalho'>Fornecedor</th>
+		<th class='cabecalho'>Cidade</th>
+		<th class='cabecalho'>Total</th>
+	</tr>
+    <tr>
+		<th class='dados'>${FORNECEDOR}</th>
+		<th class='dados'>${CIDADE_FORNECEDOR}</th>
+		<th class='dados'>${VALOR_TOTAL}</th>
+    </tr>
+  </table>
+   <table width="100%" border="1px" cellpadding="5px" cellspacing="0" ID="alter2" align="center" class='DadosFornecedor'>
+    <tr> 
+		<th class='cabecalho'>Detalhes</th>
+	</tr>
+    <tr>
+		<th class='dados'>${OBSERVACOES}</th>
+    </tr>
+  </table>
+  <br>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0" align="left">
+    <tr>
+    <th width="100%"><h3>COLABORADORES AUTORIZADOS</h3></th>
+    </tr>
+  </table>
+
+${TABELADINAMICA}
+  <br>
+  <table cellspacing="0" cellpadding="0" border="0">
+           <tbody>
+                <tr>
+                </tr>
+                <tr>
+                    <th>
+						<div class="DescrMsgForum actions">
+							<a class="action" href="${LINK}">Ir para Solicitação</a>
+							<div style="clear: both; line-height: 1px">&nbsp;</div>
+						</div>
+                    </th>
+                </tr>
+				
+			</tbody>
+        </table>
+</body>
+</html>

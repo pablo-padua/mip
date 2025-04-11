@@ -1,0 +1,962 @@
+<html>
+<head>
+<meta http-equiv="cache-control" content="max-age=0" />
+<meta http-equiv="cache-control" content="no-cache" />
+<meta http-equiv="expires" content="0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" charset="UTF-8" />
+<link type="text/css" rel="stylesheet"
+	href="/style-guide/css/fluig-style-guide.min.css" />
+<link type="text/css" rel="stylesheet" href="jquery.dataTables.min.css" />
+<link type="text/css" rel="stylesheet" href="buttons.dataTables.min.css" />
+<link rel="stylesheet" type="text/css" href="/style-guide/css/fluig-style-guide-filter.min.css">
+<link type="text/css" rel="stylesheet" href="style.css" />
+<script type="text/javascript"
+	src="/portal/resources/js/jquery/jquery.js"></script>
+<script type="text/javascript"
+	src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript"
+	src="/portal/resources/js/mustache/mustache-min.js"></script>
+<script type="text/javascript"
+	src="/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+<script src="/style-guide/js/fluig-style-guide-filter.min.js"></script>
+<script type="text/javascript" src="jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="pdfmake.min.js"></script>
+<script type="text/javascript" src="vfs_fonts.js"></script>
+<script type="text/javascript" src="buttons.html5.min.js"></script>
+<script type="text/javascript" src="jszip.min.js"></script>
+<script type="text/javascript" src="readCSV.js"></script>
+<script type="text/javascript" src="jquery.fileupload.js"></script>
+
+
+<script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+<script type="text/javascript" src="jquery.mask.js"></script>
+<script type="text/javascript" src="jquery.maskMoney.js" charset="utf-8"></script>
+<script type="text/javascript" src="genericsZoom.js"></script>
+<script type="text/javascript" src="customizado.js"></script>
+<script type="text/javascript" src="atividades.js"></script>
+<script type="text/javascript" src="dataset.js"></script>
+<script type="text/javascript" src="enableFields.js" charset="utf-8"></script>
+<script type="text/javascript" src="beforeSendValidation.js"></script>
+</head>
+<body>
+	<div class="fluig-style-guide" id="">
+		<form role="form">
+			<div class="panel-body">
+				<div class="row">
+					<div class="text-center col-md-3">
+						<!-- <span> <img src="images/Logo.png" class="img-responsive"
+							id="logo" style="display: block; margin: auto; width: 54%">
+						</span> -->
+					</div>
+					<div class="text-center col-md-6">
+						<h2>i18n.translate("text.cabecalho")</h2>
+					</div>
+					<div class="col-md-2 text-center">
+						<!-- <span class="fluigicon fluigicon-brand fluigicon-thumbnail-md"></span> -->
+					</div>
+				</div>
+			</div>
+			<!--  Campos ocultos do Formulário -->
+			<input type="hidden" id="codSCTabelaDocumentoMateriais" name="codSCTabelaDocumentoMateriais"/>
+			<input type="hidden" id="codObra" name="codObra"/>
+			<input type="hidden" id="campoIdentificador" name="campoIdentificador" value=''/>
+			<!--<input type="hidden" id="pastaDoc" name="pastaDoc" value='694430'/>   TESTE  -->
+			<input type="hidden" id="pastaDoc" name="pastaDoc" value='827922'/><!--  PRODUÇÃO  -->
+			<!--<input type="hidden" name="numGedDefault" id="numGedDefault" value='697310'>   TESTE  -->
+			<input type="hidden" name="numGedDefault" id="numGedDefault" value='1060197'><!--  PRODUÇÃO  -->
+			<input type="hidden" id="itensImportadosExel" name="itensImportadosExel" value=''/>
+			<input type="hidden" id="matriculaSolicitante" name="matriculaSolicitante" />
+			<input type="hidden" id="codColigadaSolicitante" name="codColigadaSolicitante" />
+			<input type="hidden" id="codUsuarioRM" name="codUsuarioRM" />
+			<input type="hidden" id="chapaSolicitanteRM" name="chapaSolicitanteRM" />
+			<input type="hidden" name="codColSolicitacao" id="codColSolicitacao" value=''/>
+			<input type="hidden" name="codFilialSolicitacao" id="codFilialSolicitacao" value=''/>
+			<input type="hidden" name="numIdGeradoRMTemporario" id="numIdGeradoRMTemporario"/>
+			<input type="hidden" name="hidden_codVen" id="hidden_codVen">
+			<input type="hidden" name="naturezaOrcamentaria" id="naturezaOrcamentaria">
+			<input type="hidden" name="classificacaoFinanceira" id="classificacaoFinanceira">  
+			<input type="hidden" name="idLancamento" id="idLancamento">
+			<input type="hidden" name="codCfoFunc" id="codCfoFunc">
+			<input type="hidden" id="hidden_CODSISTEMA" name="hidden_CODSISTEMA" value="T">
+			<input type="hidden" id="hidden_TempRev" name="hidden_TempRev">
+			<input type="hidden" id="hidden_TempRevMaisItem" name="hidden_TempRevMaisItem">
+			<input type="hidden" id="hidden_TempRevEdicaoItem" name="hidden_TempRevEdicaoItem">
+			<div class="container-fluid divDadosSolicitante">
+			<div class="panel panel-default" id="div_dados_solicitacao">
+				<div class="panel-heading ">
+					<h3 class="panel-title">
+						<b>i18n.translate("text.dadosSolicitacao")</b>
+					</h3>
+				</div>
+			<div class="panel-body">
+			<div class="row">
+			<!-- 
+			<div class="col-md-4 col-sm-12">
+			<div class="form-group">
+							<label for="buscarSC" class="">i18n.translate("text.buscarSC")</label>
+							<input type="zoom" id="buscarSC" name="buscarSC" class="form-control"
+										data-zoom="{
+								        'displayKey':'numeroSC',
+								        'datasetId':'ds_FormsWSUP01_solicitacaoDeCompras',
+								        'maximumSelectionLength':'1',
+								        'placeholder':'Informe a SC',
+								        'filterValues':'metadata_active,true',
+								        'fields':[{
+								               'field':'numeroSC',
+								               'label':'Número SC',
+								               'standard':'true',
+								               'visible':'true'
+								            }]
+								     }" />
+							</div>
+							</div>
+							 -->
+							<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label for="numeroSC">i18n.translate("text.numeroSC")</label>
+									<input type="text" class="form-control" placeholder="Carregando.."
+										name="numeroSC" id="numeroSC" data-size="medium"
+										readonly="readonly">
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-12">
+								<div class="form-group">
+									<label for="descricaoSC" class='required'>i18n.translate("text.descricaoSC")</label>
+									<input type="text" class="form-control" name="descricaoSC" id="descricaoSC" maxlength="68" data-size="medium">
+								</div>
+							</div>
+							<div class="col-md-1 col-sm-12">
+								<div class="form-group">
+									<label for="numeroRevSC">i18n.translate("text.numeroRevSC")</label>
+									<input type="text" class="form-control"
+										name="numeroRevSC" id="numeroRevSC" value='0'
+										placeholder="Carregando.." data-size="medium"
+										readonly="readonly">
+								</div>
+							</div>
+							
+							<div class="col-md-2 col-sm-12">
+								<div class="form-group">
+									<label for="numero_solicitacao">i18n.translate("text.numeroSolicitacao")</label>
+									<input type="text" class="form-control"
+										name="numero_solicitacao" id="numero_solicitacao"
+										placeholder="Carregando.." data-size="medium"
+										readonly="readonly">
+								</div>
+						</div>
+						<div class="col-md-2 col-sm-12">
+								<div class="form-group">
+									<label for="dataSolicitacao">i18n.translate("text.dataSolicitacao")</label>
+									<input type="text" class="form-control" name="dataSolicitacao"
+										id="dataSolicitacao" value="" placeholder=""
+										data-size="medium" readonly="readonly">
+								</div>
+							</div>
+							
+						</div>
+						<div class="row">
+							<div class="col-md-4 col-sm-12">
+								<div class="form-group">
+									<label for="nomeSolicitante">i18n.translate("text.nomeSolicitante")</label>
+									<input type="text" class="form-control"
+										name="nomeSolicitante" id="nomeSolicitante" data-size="medium"
+										readonly="readonly">
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-12">
+								<div class="form-group">
+									<label for="nmFantColSolicitacao" class="required">i18n.translate("text.nmFantColSolicitacao")</label>
+									<input type="zoom" id="nmFantColSolicitacao" name="nmFantColSolicitacao"
+										data-zoom="{
+								        'displayKey':'NOMEFANTASIA',
+								        'datasetId':'ds_ConsultaRM_WS109_RetornaColigadasPorPermissao',
+								        'fields':[
+											{
+								              'field':'NOMEFANTASIA',
+								              'label':'Nome',
+								              'standard':'true',
+								              'visible':'true'
+								            },{
+								              'field':'CODCOLIGADA',
+								              'label':'CODCOLIGADA',
+								              'standard':'true',
+								              'visible':'false'
+								            }
+								        ]
+								     }" />
+								</div>
+								<input type="hidden" name="TMOV_CODCOLIGADA" id="TMOV_CODCOLIGADA"/>
+							</div>
+							<div class="col-md-4 col-sm-12">
+								<div class="form-group">
+									<label for="nmFantFilialSolicitacao" class="required">i18n.translate("text.nmFantFilialSolicitacao")</label>
+									<input type="zoom" id="nmFantFilialSolicitacao" name="nmFantFilialSolicitacao"
+										data-zoom="{
+								        'displayKey':'NOMEFANTASIA',
+								        'datasetId':'ds_ConsultaRM_WS110_RetornaFiliaisPorPermissao',
+								        'fields':[
+											{
+								              'field':'NOMEFANTASIA',
+								              'label':'Nome',
+								              'standard':'true',
+								              'visible':'true'
+								            },{
+								              'field':'CODFILIAL',
+								              'label':'CODFILIAL',
+								              'standard':'true',
+								              'visible':'false'
+								            }
+								        ]
+								     }" />
+								</div>
+								<input type="hidden" name="TMOV_CODFILIAL" id="TMOV_CODFILIAL"/>
+							</div>
+							
+							
+							
+							
+							
+							
+						</div>
+						<!-- CAMPOS ALTERADOS APOS O DESENVOLVIMENTO -->
+						<div class="row" style="display: none;">
+						<div class="col-md-4 col-sm-12">
+								<div class="form-group">
+									<label for="nmColigadaSolicitante">i18n.translate("text.nmColigadaSolicitante")</label>
+									<input type="text" class="form-control" name="nmColigadaSolicitante" id="nmColigadaSolicitante" data-size="medium" readonly="readonly">
+								</div>
+							</div>
+							<div class="col-md-4 col-sm-12">
+								<div class="form-group">
+									<label for="nmFilialSolicitante">i18n.translate("text.nmFilialSolicitante")</label>
+									<input type="text" class="form-control" name="nmFilialSolicitante" id="nmFilialSolicitante" data-size="medium" readonly="readonly">
+								</div>
+							</div>
+						<!--
+						<div class="col-md-4 col-sm-12">
+								<div class="form-group">
+									<label for="nmFantColSolicitacao">i18n.translate("text.nmFantColSolicitacao")</label>
+									<input type="text" class="form-control" name="nmFantColSolicitacao" id="nmFantColSolicitacao" value="" data-size="medium"
+										value = '1 - MIP ENGENHARIA LTDA' readonly="readonly">
+										<input type="hidden" name="TMOV_CODCOLIGADA" id="TMOV_CODCOLIGADA" value='1'/>
+								</div>
+							</div>
+							
+							<div class="col-md-4 col-sm-12 ">
+								<div class="form-group">
+									<label for="nmFantFilialSolicitacao">i18n.translate("text.nmFantFilialSolicitacao")</label>
+										<input type="zoom" id="nmFantFilialSolicitacao" name="nmFantFilialSolicitacao" value = '1 - SEDE' class="form-control" readonly="readonly"/>
+								<input type="hidden" name="TMOV_CODFILIAL" id="TMOV_CODFILIAL" value='1'/>
+								</div>
+							</div>
+							-->
+							<div class="col-md-4 col-sm-12">
+								<div class="form-group">
+								<label class="">i18n.translate("text.tipoMovimento")</label> 
+								<select name="tipoMovimento" id="tipoMovimento" class="form-control" readonly="readonly">
+										<!-- <option value="">i18n.translate("text.selecionar")</option> -->
+										<!--<option value="1.1.04">i18n.translate("text.rmLocal")</option> -->
+										<option value="1.1.05" selected >i18n.translate("text.obraSede")</option>										
+								</select> 
+								<input type=hidden name="hidden_tipoMovimento" id="hidden_tipoMovimento" value="1.1.05"/>
+							</div>
+							</div>
+							<div class="col-md-6 col-sm-12" id="">
+							<div class="form-group tiporequisicao">
+							<label for="tiporequisicao" class="">i18n.translate("text.tiporequisicao")</label>
+							<input type="zoom" id="tiporequisicao" name="tiporequisicao" class="form-control"
+										data-zoom="{
+								        'displayKey':'NOMEFANTASIA',
+								        'datasetId':'ds_ConsultaRM_WS062_RetornaTiposDeRequicoesMovimento',
+								        'maximumSelectionLength':'1',
+								        'placeholder':'Tipo de Requisi&ccedil;&atilde;o',
+								        'fields':[
+								            {
+								               'field':'C&oacute;digo',
+								               'label':'CODIGO',
+								               'standard':'true'
+								            },{
+								              'field':'Descri&ccedil;&atilde;o',
+								              'label':'DESCRICAO',
+								              'standard':'true',
+								               'visible':'true'
+								            },{
+								              'field':'NOMEFANTASIA',
+								              'label':'NOMEFANTASIA',
+								              'standard':'true',
+								               'visible':'false'
+								            }
+								        ]
+								     }" />
+								<input type="hidden" name="MOV_TTB5_CODTB5FAT" id="MOV_TTB5_CODTB5FAT" value='002'/>
+							</div>
+							</div>
+							<div class="col-md-4 col-sm-12">
+							<div class="form-group">
+							<label for="localEstoque" class="">i18n.translate("text.localEstoque")</label>
+							<input type="zoom" id="localEstoque" name="localEstoque" class="form-control"
+									data-zoom="{
+								        'displayKey':'NOMEFANTASIA',
+								        'datasetId':'ds_ConsultaRM_WS063_RetornaLocaisEstoqueMovimentoComFiltroMovimento',
+								        'maximumSelectionLength':'1',
+								        'placeholder':'Local de Estoque',
+								        'fields':[
+								            {
+								               'field':'Local',
+								               'label':'NOMEFANTASIA',
+								               'standard':'true'
+								            },{
+								              'field':'CODLOC',
+								              'label':'CODLOC',
+								              'standard':'true',
+								               'visible':'false'
+								            },{
+								              'field':'NOME',
+								              'label':'NOME',
+								              'standard':'true',
+								               'visible':'false'
+								            }
+								        ]
+								     }" />
+								<input type="hidden" name="TMOV_CODLOC" id="TMOV_CODLOC" value='001.000'/>
+							</div>
+							</div>
+						</div>
+						<div class="row">
+						<div class="col-md-4 col-sm-12" id="">
+						<div class="form-group">
+							<label for="centroCustoSolicitacao" class="required">i18n.translate("text.centroCustoSolicitacao")</label>
+							<input type="zoom" class="form-control" id="centroCustoSolicitacao" name="centroCustoSolicitacao"
+									    data-zoom="{
+									        'displayKey':'NOME',
+									        'datasetId':'ds_RM_retorna_projeto',
+									        'maximumSelectionLength':'1',
+									        'resultLimit':'100',
+									        'placeholder':'Escolha o projeto',										        
+									        'fields':[
+									       		 {
+									              'field':'CODIGO',
+									              'label':'Codigo',
+									              'visible': 'false'
+									            },
+									            {
+									              'field':'NOME',
+									              'label':'Nome',
+									              'standard':'true'
+									            },
+									            {
+									              'field':'OBRA',
+									              'label':'Obra',
+									              'visible': 'false'
+									            },
+									            {
+									              'field':'CODCCUSTO',
+									              'label':'CODCCUSTO',
+									              'visible': 'false'
+									            }
+									        ]
+									     }"
+									/>
+								<input type="hidden" name="responsavelAprovacao" id="responsavelAprovacao"/>
+								<input type="hidden" name="MOV_GCCUSTO_CODCCUSTO" id="MOV_GCCUSTO_CODCCUSTO"/>
+								<input type="hidden" name="MOV_GCCUSTO_CODREDUZIDO" id="MOV_GCCUSTO_CODREDUZIDO"/>
+								<input type="hidden" name="MOV_GCCUSTO_COD_RESPONSAVEL" id="MOV_GCCUSTO_COD_RESPONSAVEL"/>
+								<input type="hidden" name="MOV_GCCUSTO_NOME_RESPONSAVEL" id="MOV_GCCUSTO_NOME_RESPONSAVEL"/>
+								<input type="hidden" name="MOV_GCCUSTO_ID_GCCUSTO" id="MOV_GCCUSTO_ID_GCCUSTO"/>
+								<input type="hidden" name="NUM_FIXO_OBRA" id="NUM_FIXO_OBRA"/>
+							</div>
+							</div>
+							<div class="col-md-4 col-sm-12" id="">
+							<div class="form-group">
+							<label for="disciplinaSC" class="required">i18n.translate("text.disciplinaSC")</label>
+							<select name="disciplinaSC" id="disciplinaSC" class="form-control">
+								<option value="" selected >i18n.translate("text.selecione")</option>
+									<option value="civil" >i18n.translate("text.civil")</option>
+									<option value="eletrica">i18n.translate("text.eletrica")</option>
+									<option value="tubulacao">i18n.translate("text.tubulacao")</option>
+									<option value="outros">i18n.translate("text.outros")</option>
+								</select>
+							</div>
+							</div>
+							<div class="col-md-4 col-sm-12" id="">
+							<div class="form-group">
+							<label for="apenasCotacao" class="required">i18n.translate("text.apenasCotacao")</label>
+							<select name="apenasCotacao" id="apenasCotacao" class="form-control">
+								<option value="" selected >i18n.translate("text.selecione")</option>
+									<option value="sim" >i18n.translate("text.sim")</option>
+									<option value="nao">i18n.translate("text.nao")</option>
+								</select>
+							</div>
+							</div>
+						</div>
+						<div class="row divTpMov05" id="divTpMov05">
+						<div class="col-md-4 col-sm-12" >
+						<div class="form-group">
+							<label for="filialDestino" class="">i18n.translate("text.filialDestino")</label>
+							<input type="zoom" id="filialDestino" name="filialDestino" class="form-control"
+										data-zoom="{
+								        'displayKey':'NOMEFANTASIA',
+								        'datasetId':'ds_ConsultaRM_WS064_RetornaFilialPorColigada',
+								        'maximumSelectionLength':'1',
+								        'placeholder':'Filial Destino',
+								        'fields':[
+								            {
+								               'field':'NOMEFANTASIA',
+								               'label':'Filial',
+								               'standard':'true'
+								            },{
+								              'field':'CODFILIAL',
+								              'label':'CODFILIAL',
+								              'standard':'true',
+								               'visible':'false'
+								            }
+								        ]
+								     }" />
+								<input type="hidden" name="TMOV_CODFILIALDESTINO" id="TMOV_CODFILIALDESTINO"/>
+							</div>
+							</div>
+							<div class="col-md-4 col-sm-12" id="">
+							<div class="form-group">
+									<label for="localDestino" class="">i18n.translate("text.localDestino")</label>
+									<input type="zoom" id="localDestino" name="localDestino" class="form-control"
+									data-zoom="{
+								        'displayKey':'NOMEFANTASIA',
+								        'datasetId':'ds_ConsultaRM_WS063_RetornaLocaisEstoqueMovimento',
+								        'maximumSelectionLength':'1',
+								        'placeholder':'Local de Destino',
+								        'fields':[
+								            {
+								               'field':'Local',
+								               'label':'NOMEFANTASIA',
+								               'standard':'true'
+								            },{
+								              'field':'CODLOC',
+								              'label':'CODLOC',
+								              'standard':'true',
+								               'visible':'false'
+								            },{
+								              'field':'NOME',
+								              'label':'NOME',
+								              'standard':'true',
+								               'visible':'false'
+								            }
+								        ]
+								     }" />
+								<input type="hidden" name="TMOV_CODLOCDESTINO" id="TMOV_CODLOCDESTINO"/>
+							</div>
+						</div>
+						
+					</div>
+					<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<label class="" for=obsGeralSolicitacao>i18n.translate("text.obsGeralSolicitacao")</label>
+								<textarea class="form-control" id="obsGeralSolicitacao"
+									name="obsGeralSolicitacao" rows="3"></textarea>
+							</div>
+					</div>
+					<!-- 
+						<div class="row">
+							<div class="col-md-12 col-sm-12">
+								<label class="" for=TMOVHISTORICO_HISTORICOLONGO>i18n.translate("text.ObsSolicitacao")</label>
+								<textarea class="form-control" id="TMOVHISTORICO_HISTORICOLONGO"
+									name="TMOVHISTORICO_HISTORICOLONGO" rows="4"></textarea>
+							</div>
+					</div>
+					 -->
+			</div>
+			</div>
+			
+					<div class="panel-heading divTabela">
+						<h3 class="panel-title text-center">
+							<b>i18n.translate("text.tbItens")</b>
+						</h3>
+					</div>
+					<div class="row">
+					<div class="col-md-2 col-sm-12" style=" margin-top: 25px;">
+						<button type="button" id="visualizarFileDocDefault" name="visualizarFileDocDefault" onclick="clickVisualizarDocDefault(this)"
+								class="btn btn-primary">i18n.translate("text.docDefault")</button>
+								<input type="hidden" name="hidden_LinkDefault" id="hidden_LinkDefault" class=""/>	
+							</div>
+					<div class="col-md-2 col-sm-12 divHabilitarRevisao" style="display: none; margin-top: 25px;">
+						<button type="button" id="habilitarRevisao" class="btn btn-success ">i18n.translate("text.habilitarRevisao")</button>
+					</div>
+					<div class="col-md-2 botaoAddItemManual" style="display: none; margin-top: 25px;">
+						<button type="button" id="loading-example-btn" class="btn btn-success" name="botaoAddItemManual">i18n.translate("text.botaoAddItemManual")</button>
+					</div>
+					<div class="botaoAddItemImportacao  col-md-2" style=" display: none; margin-top: 25px;">
+					<label class="btn btn-primary" id="btn-file">i18n.translate("text.botaoAddItemImport")
+					<input type="file" id="file"  name="files" class="btn btn-primary" data-url="/ecm/upload" onclick="loadUpload(this)" multiple style="display: none;">
+					</label>
+					</div>
+					<div class="col-md-2 col-sm-12 divExibDocImportado " style="display: none;">
+							<label for="nm_arquivo">i18n.translate("text.nmArquivoImport")</label> 
+								<input type="text" class="form-control nm_arquivo" name="nm_arquivo" id="nm_arquivo" data-size="medium" readonly="readonly">
+								<input type="hidden" name="numGed" id="numGed" class="form-control ">
+								<input type="hidden" name="hidden_Link" id="hidden_Link" class="LinkDoc"/>	
+					</div>		
+					<div class="col-md-3 col-sm-12 " id="" style="display: none;">
+							<div class="form-group" style="display: none;">
+							<label for="departamentoSC" class="required">i18n.translate("text.departamentoSC")</label>
+							<input type="zoom" id="departamentoSC" name="departamentoSC" class="form-control"
+									data-zoom="{
+								        'displayKey':'NOMEFANTASIA',
+								        'datasetId':'ds_ConsultaRM_WS066_RetornaDepartamentosMovimentoComFiltro',
+								        'maximumSelectionLength':'1',
+								        'placeholder':'Informe Disciplina',
+								        'fields':[
+								            {
+								               'field':'Descrição',
+								               'label':'NOMEFANTASIA',
+								               'standard':'true'
+								            },{
+								              'field':'CODDEPARTAMENTO',
+								              'label':'CODDEPARTAMENTO',
+								              'standard':'true',
+								               'visible':'false'
+								            },{
+								              'field':'NOME',
+								              'label':'NOME',
+								              'standard':'true',
+								               'visible':'false'
+								            }
+								        ]
+								     }" />
+								<input type="hidden" name="hidden_CODDEPARTAMENTO" id="hidden_CODDEPARTAMENTO" />
+							</div>
+							</div>			
+				<div class="col-md-3 linhaFiltroCodificacao" style="display: none;">
+							<div class="form-group">
+							<label for="respCodificacao" class="">i18n.translate("text.respCodificacao")</label>
+							<input type="zoom" id="respCodificacao" name="respCodificacao" class="form-control"
+													data-zoom="{
+											        'displayKey':'colleagueName',
+											        'datasetId':'ds_ConsultaFLUIG_UsuariosAtivosPorPapel_WSUP01',
+											        'maximumSelectionLength':'1',
+											        'placeholder':'Informe Usuário',
+											      'fields':[
+						            {
+						               'field':'colleagueId',
+						               'label':'Matrícula',
+						                'standard':'true',
+						               'visible':'false'
+						            },{
+						              'field':'colleagueName',
+						              'label':'Nome',
+						              'standard':'true'
+						            },{
+						              'field':'mail',
+						              'label':'Email',
+						              'visible':'false'
+						            }
+						        ]
+						     }"
+						/>
+					<input type="hidden" name="hidden_respCodificacao" id="hidden_respCodificacao"/>
+					<input type="hidden" name="hidden_respCodificName" id="hidden_respCodificName"/>
+					</div>
+					</div>
+					<div class="col-md-1 linhaFiltroCodificacao" style="display: none; margin-top: 25px;" >
+					<button type="button" id="aplicarFiltro" class="btn btn-success">i18n.translate("text.aplicar")</button>
+					</div>
+					</div>		
+	    <div class="panel-body" >
+		<div id="divTableItem" style="overflow-x: scroll; width: 100%">
+		<table id="tbItens" class="display compact" style="width:100%">
+		<thead>
+		<tr>
+		<th class="btnEdicao classTh10"></th>
+		<th class="text-center classTh50" ><b>Linha</b></th>
+		<th class="text-center classTh700"><b>Descrição</b></th>
+		<th class="text-center complem2 classTh250"><b>Resp. Códificação</b></th>
+		<th class="text-center classTh30"><b>UN</b></th>
+		<th class="text-center classTh30 classQtd"><b>Qtd</b></th>
+	    <th class="text-center classTh50" ><b>N. Item</b></th>
+		<th class="text-center classTh100"><b>Doc Origem</b></th>  
+		<!-- <th class="text-center classTh100"><b>Cód. Forn</b></th> -->	
+		<th class="text-center classTh30"><b>Rev. Doc</b></th>
+		<th class="text-center classTh100"><b>Item PQ</b></th>
+		<th class="text-center classTh100"><b>Dt Necess</b></th>
+		<th class="text-center classTh80 codPetrobras"><b>Cód Petrobras</b></th>
+		<th class="text-center classTh80 codProjetista"><b>Cód Projetista</b></th>
+		<th class="text-center complem2 classTh80"><b>WSUP02</b></th>
+		<th class="text-center complem2 classTh80"><b>ID Mov 1.1.05</b></th>
+		<th class="text-center complem2 classTh80"><b>Núm. Mov 1.1.05</b></th>
+		<th class="text-center complem2 classTh80"><b>Status Mov</b></th>
+		</tr>
+		</thead>
+	    <tbody id="tbodyDatatableItem">
+        </tbody>
+		</table>
+		</div>
+		</div>
+						<!--================================================INICIO TABELA OCULTA==================================================== -->
+						<div class="divDatatableItens" style="display: none;">
+							<div class="row">
+								<div class="col-md-12 ">
+									<table tablename="tableItens" noaddbutton="true"
+										name="tableItens" nodeletebutton="true"
+										id="tableItens"
+										customfndelete="fnCustomDelete(this, 'tableItens')">
+										<thead>
+											<tr></tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+												<input type="hidden" name="indicePaiFilhoItem" id="indicePaiFilhoItem">
+												<input type="hidden" name="numSolicDePara" id="numSolicDePara">
+												<input type="hidden" name="statusSolicFilha" id="statusSolicFilha">
+												<input type="hidden" name="revisaoSolicitacao" id="revisaoSolicitacao">
+												<input type="hidden" name="itemCancelado" id="itemCancelado">
+												<input type="hidden" name="itemExcluido" id="itemExcluido">
+												<input type="hidden" name="itemEditado" id="itemEditado">
+												<input type="hidden" name="numItemDocMat" id="numItemDocMat" maxlength="20">
+												<input type="hidden" name="qtdItem" id="qtdItem">
+												<input type="hidden" name="descUnidOrigem" id="descUnidOrigem">
+												<input type="hidden" name="unidOrigem" id="unidOrigem">
+												<input type="hidden" name="docOrigem" id="docOrigem">
+												<input type="hidden" name="codMatOrigem" id="codMatOrigem">
+												<input type="hidden" name="revDocMatOrigem" id="revDocMatOrigem" maxlength="10">
+												<input type="hidden" name="descMatOrigem" id="descMatOrigem">
+												<input type="hidden" name="dtNecessidadeMatOrigem" id="dtNecessidadeMatOrigem">
+												<input type="hidden" name="itemPQ" id="itemPQ" maxlength="70">
+												<input type="hidden" name="codPetrobras" id="codPetrobras" maxlength="30">
+												<input type="hidden" name="codProjetista" id="codProjetista" maxlength="30">
+												<input type="hidden" name="matricRespDePara" id="matricRespDePara">
+												<input type="hidden" name="nmRespDePara" id="nmRespDePara">
+												<input type="hidden" name="codItemRM" id="codItemRM">
+												<input type="hidden" name="DescItemRM" id="DescItemRM">
+												<input type="hidden" name="idMovRM" id="idMovRM">
+												<input type="hidden" name="numMovRM" id="numMovRM">
+												<input type="hidden" name="numSeqItmMovGeradoRM" id="numSeqItmMovGeradoRM">
+												<input type="hidden" id="MovProcessadoRM" name="MovProcessadoRM"/>
+												<input type="hidden" name="statusMovRM" id="statusMovRM" value='emAndamentoFluig'>
+												<input type="hidden" name="statusSolFilha" id="statusSolFilha">
+												<input type="hidden" name="idprdRmVinculado" id="idprdRmVinculado">
+												<input type="hidden" name="codProdutoRmVinculado" id="codProdutoRmVinculado">
+												<input type="hidden" name="unRmVinculado" id="unRmVinculado">
+												<input type="hidden" name="qtdRmVinculado" id="qtdRmVinculado">
+												<input type="hidden" name="descComplItem" id="descComplItem">
+												
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+						<!-- //====================================================FIM TABELA OCULTA================================================ -->
+					</div>
+				<div class="panel panel-default divGerarNovaRev" style="display: none;">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<b>i18n.translate("text.gerarNovaRevisao")</b>
+						</h3>
+					</div>
+					<div class="panel-body">
+					<div class="row">
+						<div class="col-md-3 col-sm-12 ">
+						<div class="form-group">
+							<label class='required'>i18n.translate("text.gerarNovaRev")</label>
+								<select name="gerarNovaRev" id="gerarNovaRev" class="form-control">
+									<option value="nao" selected >i18n.translate("text.nao")</option>
+									<option value="sim">i18n.translate("text.sim")</option>
+								</select>
+							<input type="hidden" name="hidden_gerarNovaRev" id="hidden_gerarNovaRev" />
+						</div>
+						</div>
+						<div class="col-md-12 col-sm-12 observacaoNovaRev" style="display: none;">
+							<div class="form-group">
+								<label for="observacaoNovaRev" class="">i18n.translate("text.observacaoNovaRev")</label>
+								<textarea class="form-control" name="observacaoNovaRev" id="observacaoNovaRev" rows="3"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+	</div>		
+	<div class="panel panel-default divOpcaoContrato" style="display: none;">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<b>i18n.translate("text.opcaoContrato")</b>
+						</h3>
+					</div>
+					<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12 col-sm-12 obsAberturaContrato" >
+							<div class="form-group">
+								<label for="obsAberturaContrato" class="required">i18n.translate("text.obsAberturaContrato")</label>
+								<textarea class="form-control" name="obsAberturaContrato" id="obsAberturaContrato" rows="3"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- 	<div class="panel panel-default divValidarInfo">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<b>i18n.translate("text.validarInfo")</b>
+						</h3>
+					</div>
+					<div class="panel-body">
+					<div class="row">
+						<div class="col-md-3 col-sm-12 ">
+						<div class="form-group">
+							<label class='required'>i18n.translate("text.enviarParaAjustes")</label>
+								<select name="enviarParaAjustes" id="enviarParaAjustes" class="form-control">
+									<option value="nao" selected >i18n.translate("text.nao")</option>
+									<option value="sim">i18n.translate("text.sim")</option>
+								</select>
+							<input type="hidden" name="hidden_enviarParaAjustes" id="hidden_enviarParaAjustes" />
+						</div>
+						</div>
+						<div class="col-md-12 col-sm-12 observacaoLOS" style="display: none;">
+							<div class="form-group">
+								<label for="observacaoLOS" class="">i18n.translate("text.observacaoLOS")</label>
+								<textarea class="form-control" name="observacaoLOS" id="observacaoLOS" rows="3"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+	</div>	 -->
+	<div class="panel panel-default divAprovacaoCoordPlanejamento" id="divAprovacaoCoordPlanejamento">
+				<div class="panel-heading ">
+					<h3 class="panel-title">
+						<b>i18n.translate("text.aprovacaoCoordPlan")</b>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="form-group row">
+						<div class="col-md-3 col-sm-12">
+							<label for="tipoAprovCoordPlan" class="required">i18n.translate("text.tipoAprovCoordPlan")</label>
+							<select name="tipoAprovCoordPlan" id="tipoAprovCoordPlan"
+								class="form-control">
+								<option value="">i18n.translate("text.selecionar")</option>
+								<option value="aprovado">i18n.translate("text.aprovado")</option>
+								<option value="ajustar">i18n.translate("text.ajustar")</option>
+							</select> <input type=hidden name="hidden_tipoAprovCoordPlan"
+								id="hidden_tipoAprovCoordPlan" />
+						</div>
+						<div class="col-md-4 col-sm-12">
+						</div>
+						<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label for="nomeCoordPlanAprov">i18n.translate("text.nomeCoordPlanAprov")</label>
+									<input type="text" class="form-control" name="nomeCoordPlanAprov" id="nomeCoordPlanAprov" readonly="readonly">
+								</div>
+						</div>
+						<div class="col-md-2 col-sm-12">
+								<div class="form-group">
+									<label for="dataAprovCoordPlan">i18n.translate("text.dataAprovCoordPlan")</label>
+									<input type="text" class="form-control" name="dataAprovCoordPlan" id="dataAprovCoordPlan"  readonly="readonly">
+								</div>
+							</div>
+						
+						
+					</div>
+					<div class="form-group row">
+						<div class="col-md-12 col-sm-12">
+							<label for="observacaoAprovCoordPlan">
+								i18n.translate("text.observacaoAprovCoordPlan") </label>
+							<textarea class="form-control" name="observacaoAprovCoordPlan"
+								id="observacaoAprovCoordPlan"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+				<div class="panel panel-default divAprovacaoGerente" id="divAprovacaoGerente">
+				<div class="panel-heading ">
+					<h3 class="panel-title">
+						<b>i18n.translate("text.aprovacaoGerente")</b>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="form-group row">
+						<div class="col-md-3 col-sm-12">
+							<label for="tipoAprovGerente" class="required">i18n.translate("text.tipoAprovGerente")</label>
+							<select name="tipoAprovGerente" id="tipoAprovGerente"
+								class="form-control">
+								<option value="">i18n.translate("text.selecionar")</option>
+								<option value="aprovado">i18n.translate("text.aprovado")</option>
+								<option value="ajustar">i18n.translate("text.ajustar")</option>
+							</select> <input type=hidden name="hidden_tipoAprovGerente"
+								id="hidden_tipoAprovGerente" />
+						</div>
+						<div class="col-md-4 col-sm-12">
+						</div>
+						<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label for="nomeGerenteAprov">i18n.translate("text.nomeGerenteAprov")</label>
+									<input type="text" class="form-control" name="nomeGerenteAprov" id="nomeGerenteAprov" readonly="readonly">
+								</div>
+						</div>
+						<div class="col-md-2 col-sm-12">
+								<div class="form-group">
+									<label for="dataAprovGerente">i18n.translate("text.dataAprovGerente")</label>
+									<input type="text" class="form-control" name="dataAprovGerente" id="dataAprovGerente"  readonly="readonly">
+								</div>
+							</div>
+						
+						
+					</div>
+					<div class="form-group row">
+						<div class="col-md-12 col-sm-12">
+							<label for="observacaoAprovGerente">
+								i18n.translate("text.observacaoAprovGerente") </label>
+							<textarea class="form-control" name="observacaoAprovGerente"
+								id="observacaoAprovGerente"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel panel-default divAprovacaoCoordPlanejamentoRev" id="divAprovacaoCoordPlanejamentoRev">
+				<div class="panel-heading ">
+					<h3 class="panel-title">
+						<b>i18n.translate("text.aprovacaoCoordPlanRev")</b>
+					</h3>
+				</div>
+				<div class="panel-body divAtivAprovRevCoordPlan">
+					<div class="form-group row">
+						<div class="col-md-3 col-sm-12">
+							<label for="tipoAprovCoordPlanRev" class="required">i18n.translate("text.tipoAprovCoordPlanRev")</label>
+							<select name="tipoAprovCoordPlanRev" id="tipoAprovCoordPlanRev"
+								class="form-control">
+								<option value="">i18n.translate("text.selecionar")</option>
+								<option value="aprovado">i18n.translate("text.aprovado")</option>
+								<option value="ajustar">i18n.translate("text.ajustar")</option>
+							</select> 
+						</div>
+						<div class="col-md-4 col-sm-12">
+						</div>
+						<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label for="nomeCoordPlanAprovRev">i18n.translate("text.nomeCoordPlanAprovRev")</label>
+									<input type="text" class="form-control" name="nomeCoordPlanAprovRev" id="nomeCoordPlanAprovRev" readonly="readonly">
+								</div>
+						</div>
+						<div class="col-md-2 col-sm-12">
+								<div class="form-group">
+									<label for="dataAprovCoordPlanRev">i18n.translate("text.dataAprovCoordPlanRev")</label>
+									<input type="text" class="form-control" name="dataAprovCoordPlanRev" id="dataAprovCoordPlanRev"  readonly="readonly">
+								</div>
+							</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-md-12 col-sm-12">
+							<label for="observacaoAprovCoordPlanRev">
+								i18n.translate("text.observacaoAprovCoordPlanRev") </label>
+							<textarea class="form-control" name="observacaoAprovCoordPlanRev"
+								id="observacaoAprovCoordPlanRev"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+				<div class="panel panel-default divAprovacaoGerenteRev" id="divAprovacaoGerenteRev">
+				<div class="panel-heading ">
+					<h3 class="panel-title">
+						<b>i18n.translate("text.aprovacaoGerenteRev")</b>
+					</h3>
+				</div>
+				<div class="panel-body divAtivAprovRevGer">
+					<div class="form-group row">
+						<div class="col-md-3 col-sm-12">
+							<label for="tipoAprovGerenteRev" class="required">i18n.translate("text.tipoAprovGerenteRev")</label>
+							<select name="tipoAprovGerenteRev" id="tipoAprovGerenteRev"
+								class="form-control">
+								<option value="">i18n.translate("text.selecionar")</option>
+								<option value="aprovado">i18n.translate("text.aprovado")</option>
+								<option value="ajustar">i18n.translate("text.ajustar")</option>
+							</select> 
+						</div>
+						<div class="col-md-4 col-sm-12">
+						</div>
+						<div class="col-md-3 col-sm-12">
+								<div class="form-group">
+									<label for="nomeGerenteAprovRev">i18n.translate("text.nomeGerenteAprovRev")</label>
+									<input type="text" class="form-control" name="nomeGerenteAprovRev" id="nomeGerenteAprovRev" readonly="readonly">
+								</div>
+						</div>
+						<div class="col-md-2 col-sm-12">
+								<div class="form-group">
+									<label for="dataAprovGerenteRev">i18n.translate("text.dataAprovGerenteRev")</label>
+									<input type="text" class="form-control" name="dataAprovGerenteRev" id="dataAprovGerenteRev"  readonly="readonly">
+								</div>
+							</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-md-12 col-sm-12">
+							<label for="observacaoAprovGerenteRev">
+								i18n.translate("text.observacaoAprovGerenteRev") </label>
+							<textarea class="form-control" name="observacaoAprovGerenteRev"
+								id="observacaoAprovGerenteRev"></textarea>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div class="panel panel-default divTableAprovRev" id="divTableAprovRev" style="display: none;">
+				<div class="panel-heading ">
+					<h3 class="panel-title">
+						<b>i18n.translate("text.TableAprovRev")</b>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="form-group row">
+					<div class="divTableAprovRev" >
+		<table id="tbAprovRev" class="display compact" style="width:100%">
+		<thead>
+		<tr><th class="text-center"><b>Revisão</b></th>
+		<th class="text-center"><b>Data Aprov Coord.</b></th>
+		<th class="text-center"><b>Nome Coord. </b></th>
+		<th class="text-center"><b>Observação Coord</b></th>
+		<th class="text-center"><b>Data Aprov. Ger</b></th>
+		<th class="text-center"><b>Nome Gerente. </b></th>
+		<th class="text-center"><b>Observação Gerente</b></th>
+		</tr>
+		</thead>
+	    <tbody id="tbodyTableAprovRev">
+        </tbody>
+		</table>
+		</div>
+		</div>
+		</div>
+		</div>
+<div class="divTabelaRevisoes" style="display: none;">
+							<div class="row">
+								<div class="col-md-12 ">
+									<table tablename="tableRevItens" noaddbutton="true" nodeletebutton="true" 
+										name="tableRevItens" id="tableRevItens"
+										customfndelete="fnCustomDelete(this, 'tableRevItens')">
+										<thead>
+											<tr></tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>
+												<input type="hidden" name="indicePaiFilhoTbItem" id="indicePaiFilhoTbItem">
+												<input type="hidden" name="indicePaiFilhoItemRev" id="indicePaiFilhoItemRev">
+												<input type="hidden" name="qtdOriginal" id="qtdOriginal">
+												<input type="hidden" name="qtdRev" id="qtdRev">
+												<input type="hidden" name="numControleRev" id="numControleRev">
+												<input type="hidden" name="idMovAnterior" id="idMovAnterior">
+												<input type="hidden" name="numSequItmMovAnterior" id="numSequItmMovAnterior">
+												<input type="hidden" name="numMovIntegracaoRev" id="numMovIntegracaoRev">
+												<input type="hidden" name="revisaoAprovadaCoordPlan" id="revisaoAprovadaCoordPlan">
+												<input type="hidden" name="dtAprovRevisaoCoordPlan" id="dtAprovRevisaoCoordPlan">
+												<input type="hidden" name="nomeAprovRevisaoCoordPlan" id="nomeAprovRevisaoCoordPlan">
+												<input type="hidden" name="ObsAprovRevisaoCoordPlan" id="ObsAprovRevisaoCoordPlan">
+												<input type="hidden" name="revisaoAprovadaGerente" id="revisaoAprovadaGerente">
+												<input type="hidden" name="dtAprovRevisaoGerente" id="dtAprovRevisaoGerente">
+												<input type="hidden" name="nomeAprovRevisaoGerente" id="nomeAprovRevisaoGerente">
+												<input type="hidden" name="ObsAprovRevisaoGerente" id="ObsAprovRevisaoGerente">
+												</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+		</form>
+	</div>
+</body>
+</html>

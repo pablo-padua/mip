@@ -1,0 +1,30 @@
+.disabledButtons {
+    pointer-events: none;
+    opacity: 0.4;
+}
+.atencaoVermelho {
+	color: red;
+	font-weight: bold;
+}
+.required:after {
+	content: " *";
+	color: red;
+}
+.lixeiraCustomizada {
+	background: transparent;
+	background-image: url("lixeira.png");
+	background-repeat: no-repeat;
+	background-position: center top;
+	border: 0px;
+	cursor: pointer;
+	/*width:52px;
+	height:52px;*/
+	padding-top: 35px;
+	width: 28px;
+	color: darkgrey;
+}
+
+
+div.table {
+            overflow-x: scroll;
+        }

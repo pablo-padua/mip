@@ -1,0 +1,776 @@
+<html>
+<head>
+<link type="text/css" rel="stylesheet" href="/portal/resources/style-guide/css/fluig-style-guide.min.css" />
+<link type="text/css" rel="stylesheet" href="style.css" />
+<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+<script type="text/javascript" src="/portal/resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+<script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+<script type="text/javascript" src="jquery.mask.js"></script>
+<script type="text/javascript" src="genericsZoom.js"></script>
+<script type="text/javascript" src="customizado.js"></script>
+<script type="text/javascript" src="atividades.js"></script>
+<script type="text/javascript" src="dataset.js"></script>
+<script type="text/javascript" src="readCSV.js"></script>
+<script type="text/javascript" src="readCSVTerc.js"></script>
+<script type="text/javascript" src="UniversalReadCSV.js"></script>
+<script type="text/javascript" src="jquery.maskMoney.js" charset="utf-8"></script>
+<script type="text/javascript" src="enableFields.js" charset="utf-8"></script>
+<script type="text/javascript" src="beforeSendValidation.js"></script>
+</head>
+<body>
+	<div class="fluig-style-guide">
+		<form name="form" role="form">
+			
+			<!--  Campos ocultos do Formulario -->
+			<input type="hidden" name="is_mobile" id="is_mobile">
+			<input type="hidden" name="codColigadaSolicitante" id="codColigadaSolicitante">
+			<input type="hidden" name="matrSolicitante" id="matrSolicitante">
+			<input type="hidden" name="emailSolicitante" id="emailSolicitante">
+			<input type="hidden" name="chapaSolicitanteRM" id="chapaSolicitanteRM">
+			<input type="hidden" name="codUsuarioRM" id="codUsuarioRM">
+			<input type="hidden" name="hidden_codVen" id="hidden_codVen">
+			<!--  <input type="hidden" name="itensImportadosExelFunc" id="itensImportadosExelFunc">
+			<input type="hidden" name="itensImportadosExelTerc" id="itensImportadosExelTerc"> -->
+			<input type="hidden" name="itensImportadosExel" id="itensImportadosExel">
+			<input type="hidden" name="solicitCancelada" id="solicitCancelada" >
+			<input type="hidden" name="campoIdentificador" id="campoIdentificador" >
+			
+			<!-- Variavel fixa para verificacao de permissao do usuario no modulo -->
+			<input type="hidden" id="hidden_CODSISTEMA" name="hidden_CODSISTEMA"value="F">
+			<div class="panel panel-default divDadosSolicitante">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<b>i18n.translate("text.dadosDoSolicitante")</b>
+						</h3>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="nomeSolicitante">i18n.translate("text.nomeDoSolicitante")</label>
+									<input type="text" class="form-control" name="nomeSolicitante"
+										id="nomeSolicitante" value="" data-size="medium"
+										readonly="readonly">
+
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="dataSolicitacao">i18n.translate("text.dataSolicitacao")</label>
+									<input type="text" class="form-control" name="dataSolicitacao"
+										id="dataSolicitacao" value="" placeholder=""
+										data-size="medium" readonly="readonly">
+								</div>
+							</div>
+							<div class="col-md-3">
+							
+							</div>
+							<div class="col-md-3">
+								<div class="form-group">
+									<label for="numero_solicitacao">i18n.translate("text.numero_solicitacao")</label>
+									<input type="text" class="form-control"
+										name="numero_solicitacao" id="numero_solicitacao" placeholder="Carregando..."
+										data-size="medium" readonly="readonly">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+						<div class="col-md-6 col-sm-12">
+								<div class="form-group">
+									<label for="nmColigadaSolicitante">i18n.translate("text.nmColigadaSolicitante")</label>
+									<input type="text" class="form-control" name="nmColigadaSolicitante" id="nmColigadaSolicitante" data-size="medium" readonly="readonly">
+								</div>
+							</div>
+							<div class="col-md-6 col-sm-12">
+								<div class="form-group">
+									<label for="nmFilialSolicitante">i18n.translate("text.nmFilialSolicitante")</label>
+									<input type="text" class="form-control" name="nmFilialSolicitante" id="nmFilialSolicitante" data-size="medium" readonly="readonly">
+								</div>
+							</div>
+						</div>
+						<div class="row">
+						<div class="col-md-4">
+						<div class="form-group">
+							<label for="obra" class="required">i18n.translate("text.projeto")</label>
+							<input type="zoom" class="form-control" id="txt_projeto" name="txt_projeto"
+									    data-zoom="{
+									        'displayKey':'NOME',
+									        'datasetId':'ds_RM_retorna_projeto',
+									        'maximumSelectionLength':'1',									        
+									        'placeholder':'Escolha o projeto',
+									        'fields':[
+									       		{'field':'CODIGO', 'visible': 'false'},
+									            {'field':'NOME', 'label':'Nome','standard':'true'},
+									            {'field':'OBRA', 'visible': 'false'},
+									            {'field':'EMPRESA', 'visible': 'false'},
+									            {'field':'CODCCUSTO', 'visible': 'false'},
+									            {'field':'CODCCUSTO_SUBCONTRATO', 'visible': 'false'}
+									        ]
+									     }"
+									/>
+									<input type="hidden" name="hidden_CODCCUSTO" id="hidden_CODCCUSTO" class="form-control">
+									<input type="hidden" name="hidden_CENTROCUSTO" id="hidden_CENTROCUSTO" class="form-control">
+									<input type="hidden" name="CODCCUSTO_SUBCONTRATO" id="CODCCUSTO_SUBCONTRATO" class="form-control">
+									<input type="hidden" name="codColigadaProjeto" id="codColigadaProjeto" class="form-control">
+							</div>
+							</div>
+							<div class="col-md-2">
+								<div class="form-group">
+									<label for="txt_obra">Obra</label>
+									<input type="text" name="txt_obra" id="txt_obra" class="form-control" readonly>
+								</div>
+							</div>
+							<div class="col-md-2 col-sm-12">
+								<div class="form-group">
+									<label for="gestor">i18n.translate("text.gestor")</label>
+									<input type="text" name="txt_gestor" id="txt_gestor" class="form-control" readonly>
+									<input type="hidden" name="txt_chapagestor" id="txt_chapagestor" class="form-control">
+									<input type="hidden" name="txt_usercodegestor" id="txt_usercodegestor" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-2 col-sm-12">
+								<div class="form-group">
+									<label for="contatoSolicitante" class="required">i18n.translate("text.contatoSolicitante")</label>
+									<input type="text" name="contatoSolicitante" id="contatoSolicitante" class="form-control telefone" placeholder="(xx)xxxx-xxxx">
+								</div>
+							</div>
+							<div class="col-md-2">
+							<label for="dtVoucher" class="required">i18n.translate("text.dtVoucher")</label>
+							<div class="input-group">
+								<input type="text" class="form-control ValidarDt date dtVoucher"
+									name="dtVoucher" id="dtVoucher"> <span
+									class="input-group-addon"> <span
+									class="fluigicon fluigicon-calendar"></span>
+								</span>
+							</div>
+						</div>
+							</div>
+							<div class="row">			
+					<div class="col-md-4">
+								<div class="form-group">
+									<label for="fornecedor" class="required">i18n.translate("text.fornecedor")</label>
+									<input type="zoom" id="fornecedor" name="fornecedor"
+										data-zoom="{
+								        'displayKey':'NOMECONCAT',
+								        'datasetId':'ds_ConsultaRM_WS116_RetornaValoresPreCadastradosRefeicoesFornecedor',
+								         'maximumSelectionLength':'1',
+								        'placeholder':'Informe o Fornecedor',
+								        'fields':[
+											{
+								              'field':'NOMECONCAT',
+								              'label':'Nome',
+								              'standard':'true',
+								              'visible':'true'
+								            },{
+								              'field':'CODCFO',
+								              'label':'CODCFO',
+								              'standard':'true',
+								              'visible':'false'
+								            },{
+								              'field':'CODCOLIGADA',
+								              'label':'CODCOLIGADA',
+								              'visible':'false'
+								            }
+								        ]
+								     }" />
+								     <input type="hidden" name="hidden_codcfo" id="hidden_codcfo" class="form-control">
+									<input type="hidden" name="hidden_nomefantasia" id="hidden_nomefantasia" class="form-control">
+									<input type="hidden" name="hidden_cgccfo" id="hidden_cgccfo" class="form-control">
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="contrato" class="required">i18n.translate("text.contrato")</label>
+									<input type="zoom" id="contrato" name="contrato"
+										data-zoom="{
+								        'displayKey':'NOMEFANTASIA',
+								        'datasetId':'ds_ConsultaRM_WS139_RetornaContratosPorFornecedor',
+								         'maximumSelectionLength':'1',
+								        'placeholder':'Informe o Contrato',
+								        'fields':[
+											{
+								              'field':'NOMEFANTASIA',
+								              'label':'Nome',
+								              'standard':'true',
+								              'visible':'true'
+								            },{
+								              'field':'CODIGOCONTRATO',
+								              'label':'CODIGOCONTRATO',
+								              'standard':'true',
+								              'visible':'false'
+								            },
+								            {'field':'VALORCAFE', 'visible':'false'},
+								            {'field':'VALORALMOCO', 'visible':'false'},
+								            {'field':'VALORALMOCOPEQUENO', 'visible':'false'},
+								            {'field':'VALORJANTAR', 'visible':'false'},
+								            {'field':'VALORJANTARPEQUENO', 'visible':'false'}
+								        ]
+								     }" />
+								     <input type="hidden" name="hidden_IDCNT" id="hidden_IDCNT">
+									<input type="hidden" name="hidden_CODTCN" id="hidden_CODTCN" >
+									<input type="hidden" name="hidden_CODIGOCONTRATO" id="hidden_CODIGOCONTRATO">
+									<input type="hidden" name="hidden_DATAINICIO" id="hidden_DATAINICIO">
+									<input type="hidden" name="hidden_DATAFIM" id="hidden_DATAFIM">
+									<input type="hidden" name="hidden_DATAADITIVO" id="hidden_DATAADITIVO">
+								</div>
+							</div>
+							<div class="col-md-2 col-sm-12">
+								<div class="form-group">
+									<label for="cidadeFornecedor">i18n.translate("text.cidadeFornecedor")</label>
+									<input type="text" name="cidadeFornecedor" id="cidadeFornecedor" class="form-control" readonly>	
+								</div>
+							</div>
+							<div class="col-md-2 col-sm-12">
+								<div class="form-group">
+									<label for="emailFornecedor">i18n.translate("text.emailFornecedor")</label>
+									<input type="text" name="emailFornecedor" id="emailFornecedor" class="form-control">	
+								</div>
+							</div>
+							
+
+						</div>
+						<div class="row">
+						<div class="col-md-12 col-sm-12">
+						<label for="observacoesGerais">i18n.translate("text.observacoesGerais") </label>
+							<textarea class="form-control" name="observacoesGerais" id="observacoesGerais"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			<div class="panel panel-default divValoresAlimentacaoFornecedor">
+				<div class="panel-heading ">
+					<h3 class="panel-title">
+						<b>i18n.translate("text.valoresAlimentacaoFornecedor")</b>
+					</h3>
+				</div>
+			<div class="panel-body">
+			<div class="row">
+				<div class="col-md-2 col-sm-2">
+					<div class="form-group">
+						<label for="valorPreAprovCafe">i18n.translate("text.valorPreAprovCafe")</label>
+						<input type="text" class="form-control" name="valorPreAprovCafe" id="valorPreAprovCafe" data-size="medium" readonly="readonly">
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2">
+					<div class="form-group">
+						<label for="valorPreAprovAlmoco">i18n.translate("text.valorPreAprovAlmoco")</label>
+						<input type="text" class="form-control" name="valorPreAprovAlmoco" id="valorPreAprovAlmoco" data-size="medium" readonly="readonly">
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2">
+					<div class="form-group">
+						<label for="valorPreAprovAlmocoPequeno">i18n.translate("text.valorPreAprovAlmocoPequeno")</label>
+						<input type="text" class="form-control" name="valorPreAprovAlmocoPequeno" id="valorPreAprovAlmocoPequeno" data-size="medium" readonly="readonly">
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2">
+					<div class="form-group">
+						<label for="valorPreAprovJantar">i18n.translate("text.valorPreAprovJantar")</label>
+						<input type="text" class="form-control" name="valorPreAprovJantar" id="valorPreAprovJantar" data-size="medium" readonly="readonly">
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2">
+					<div class="form-group">
+						<label for="valorPreAprovJantarPequeno">i18n.translate("text.valorPreAprovJantarPequeno")</label>
+						<input type="text" class="form-control" name="valorPreAprovJantarPequeno" id="valorPreAprovJantarPequeno" data-size="medium" readonly="readonly">
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2">
+					<div class="form-group">
+						<label for="valorTotalSolicitacao">i18n.translate("text.valorTotalSolicitacao")</label>
+						<input type="text" class="form-control" name="valorTotalSolicitacao" id="valorTotalSolicitacao" data-size="medium" readonly="readonly">
+					</div>
+				</div>
+			</div>
+			<div class="row sr-only">
+				<div class="col-md-2 col-sm-2">
+					<div class="form-group">
+						<label for="valorPreAprovAgua">i18n.translate("text.valorPreAprovAgua")</label>
+						<input type="text" class="form-control" name="valorPreAprovAgua" id="valorPreAprovAgua" data-size="medium" readonly="readonly">
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2">
+					<div class="form-group">
+						<label for="valorTotalDesconto">i18n.translate("text.valorTotalDesconto")</label>
+						<input type="text" class="form-control" name="valorTotalDesconto" id="valorTotalDesconto" value='0' data-size="medium" readonly="readonly">
+					</div>
+				</div>
+				<div class="col-md-2 col-sm-2">
+					<div class="form-group">
+						<label for="valorTotalAcrescimo">i18n.translate("text.valorTotalAcrescimo")</label>
+						<input type="text" class="form-control" name="valorTotalAcrescimo" id="valorTotalAcrescimo" value='0' data-size="medium" readonly="readonly">
+					</div>
+				</div>
+				<div class="col-md-2">
+				
+				</div>
+			</div>
+			</div>
+			</div>		
+			
+			<div class="panel panel-default divImportacaoProgramados">
+				<div class="panel-heading ">
+				<h3 class="panel-title">
+						<b>i18n.translate("text.ImportacaoProgramados")</b>
+					</h3>
+				</div>
+				<div class="panel-body"> 
+					<div class="row">
+					
+						<div class="col-md-2 text-center fileCSVTerc" >
+							<label class="btn btn-primary pull-right" id="btn-fileCSVTerc"> i18n.translate("text.arquivoTerc")
+							<input type="file" id="fileCSVTerc" name="fileCSVTerc" class="" style="display: none;"></label>
+						</div>
+						<div class="col-md-2 text-center fileCSVTerc">
+							<label class="pull-left">Exemplo de Modelo .CSV </label>
+						</div>
+						<div class="col-md-1 fileCSVTerc">
+							<a href="Modelo_WADMO01.csv"><i class="flaticon flaticon-documents icon-xl"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel divTabelaFuncionariosProgramados" style="overflow-x: scroll; width: 100%">
+				<div class="panel-heading ">
+				<div class="col-md-6" >
+					<h3 class="panel-title">
+						<b>i18n.translate("text.funcionariosProgramados")</b>
+					</h3>
+				</div>
+			</div>
+				<!--
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-8" >
+						</div>
+						<div class="col-md-2 text-center fileCSVTerc" >
+							<label class="btn btn-primary pull-right" id="btn-fileCSVTerc"> i18n.translate("text.arquivoTerc")
+							<input type="file" id="fileCSVTerc" name="fileCSVTerc" class="" style="display: none;"></label>
+						</div>
+						<div class="col-md-5 text-center fileCSVTerc">
+							<label>Exemplo de Modelo .CSV    </label>
+							<a href="Modelo_WADMO01_Terceiros.csv"><i class="flaticon flaticon-documents icon-xl"></i></a>
+						</div>
+					</div>
+				</div>
+			 	-->
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12 form-group">
+								<table  class=" fs-no-border table table-striped" style="table-layout: fixed; min-width:1900px"
+									tablename="tablenameFuncionarios" noaddbutton="true"
+									name="tablenameFuncionarios" nodeletebutton="true"
+									id="tablenameFuncionarios"
+									customfndelete="fnCustomDelete(this, 'tablenameFuncionarios')">
+									<thead>
+										<tr>
+											<th style="width: 3%;" class=""></th>
+											<th style="width: 3%;" class="buttaoDelete"></th>
+											<th style="width: 30%;" class="funcionario required"><label for="funcionario">i18n.translate("text.funcionario")</label></th>
+											<th style="width: 20%;" class="cargoFuncionario"><label for="cargoFuncionario">i18n.translate("text.cargoFuncionario")</label></th>
+											<th style="width: 5%;" class="">
+											<label for="checkboxCafe">i18n.translate("text.checkboxCafe")</label>
+											<div class="switch switch-success classSelectAllCafe">
+											    <input class="switch-input classSelectAllCafe" name="selectAllCafe" type="checkbox" id="selectAllCafe" onclick="autorizarCafe(this)" />
+											    <label class="switch-button classSelectAllCafe" for="selectAllCafe"></label>
+								            </div>
+											</th>
+											<th style="width: 5%;" class="">
+											<label for="checkboxAlmoco">i18n.translate("text.checkboxAlmoco")</label>
+											<div class="switch switch-success classSelectAllAlmoco">
+											    <input class="switch-input classSelectAllAlmoco" name="selectAllAlmoco" type="checkbox" id="selectAllAlmoco" onclick="autorizarAlmoco(this)" />
+											    <label class="switch-button classSelectAllAlmoco" for="selectAllAlmoco"></label>
+								            </div>
+								            </th>
+								            <th style="width: 5%;" class="">
+											<label for="checkboxAlmocoPequeno">i18n.translate("text.checkboxAlmocoPequeno")</label>
+											<div class="switch switch-success classSelectAllAlmocoPequeno">
+											    <input class="switch-input classSelectAllAlmocoPequeno" name="selectAllAlmocoPequeno" type="checkbox" id="selectAllAlmocoPequeno" onclick="autorizarAlmocoPequeno(this)" />
+											    <label class="switch-button classSelectAllAlmocoPequeno" for="selectAllAlmocoPequeno"></label>
+								            </div>
+								            </th>
+											<th style="width: 5%;" class="">
+											<label for="checkboxJantar">i18n.translate("text.checkboxJantar")</label>
+											<div class="switch switch-success classSelectAllJantar">
+											    <input class="switch-input classSelectAllJantar" name="selectAllJantar" type="checkbox" id="selectAllJantar" onclick="autorizarJantar(this)" />
+											    <label class="switch-button classSelectAllJantar" for="selectAllJantar"></label>
+								            </div>
+											</th>
+											<th style="width: 5%;" class="">
+											<label for="checkboxJantarPequeno">i18n.translate("text.checkboxJantarPequeno")</label>
+											<div class="switch switch-success classSelectAllJantarPequeno">
+											    <input class="switch-input classSelectAllJantarPequeno" name="selectAllJantarPequeno" type="checkbox" id="selectAllJantarPequeno" onclick="autorizarJantarPequeno(this)" />
+											    <label class="switch-button classSelectAllJantarPequeno" for="selectAllJantarPequeno"></label>
+								            </div>
+											</th>
+											<th style="width: 5%;" class="sr-only">
+											<label for="checkboxAgua">i18n.translate("text.checkboxAgua")</label>
+											<div class="switch switch-success classSelectAllAgua">
+											    <input class="switch-input classSelectAllAgua" name="selectAllAgua" type="checkbox" id="selectAllAgua" onclick="autorizarAgua(this)" />
+											    <label class="switch-button classSelectAllAgua" for="selectAllAgua"></label>
+								            </div>
+											</th>
+											<th style="width: 10%;" class="vlrVoucher">
+											<label for="vlrVoucher"  class="vlrVoucher fs-text-right">i18n.translate("text.vlrVoucher")</label>
+											</th>
+											<th style="width: 10%;" class="vlrVoucherDesconto sr-only">
+											<label for="vlrVoucherDesconto"  class="vlrVoucherDesconto">i18n.translate("text.vlrVoucherDesconto")</label>
+											</th>
+											<th style="width: 10%;" class="vlrVoucherAcrescimo sr-only">
+											<label for="vlrVoucherAcrescimo"  class="vlrVoucherAcrescimo">i18n.translate("text.vlrVoucherAcrescimo")</label>
+											</th>
+											<th style="width: 20%;" class="localEntrega">
+											<label for="localEntrega"  class="localEntrega">i18n.translate("text.localEntrega")</label>
+											</th>
+										</tr>
+										</thead>
+									<tbody>
+										<tr>
+										<td class="indiceLinhaFunc" id="indiceLinhaFunc"></td>
+										<td class="buttaoDelete"><input type="button" name="buttaoDelete" id="buttaoDelete" class="lixeiraCustomizada" onclick="fnCustomDelete(this);"/></td>
+											
+											<td class="funcionario"><input type="zoom" id="funcionario" name="funcionario"
+															data-zoom="{
+														        'displayKey':'NOMEFANTASIA',
+														        'datasetId':'ds_Corpore_VwMIP_FLUIG_PPESSOA',
+														        'maximumSelectionLength':'1',
+														        'resultLimit':'100',
+														        'placeholder':'Escolha o Funcionario ou Candidato',
+														        'fields':[
+														            {
+														               'field':'NOMEFANTASIA',
+														               'label':'Funcionário',
+														               'standard':'true'
+														            },
+														            {
+														               'field':'CPF',														               
+														               'visible':'false'
+														            }
+														        ]
+														     }" />
+														<input type="hidden" name="hidden_indexFuncionario" id="hidden_indexFuncionario"/>
+														<input type="hidden" name="hidden_matriculaFuncionario" id="hidden_matriculaFuncionario"/>
+														<input type="hidden" name="hidden_nomeFuncionario" id="hidden_nomeFuncionario"/>
+														<input type="hidden" name="hidden_FuncCODCCUSTO" id="hidden_FuncCODCCUSTO"/>
+														<input type="hidden" name="hidden_FuncCODSECAO" id="hidden_FuncCODSECAO"/>
+														<input type="hidden" name="hidden_FuncCODFUNCAO" id="hidden_FuncCODFUNCAO"/>
+														<input type="hidden" name="hidden_CPF" id="hidden_CPF"/>
+														<input type="hidden" name="hidden_DATA_CARTAO_REFEIC" id="hidden_DATA_CARTAO_REFEIC"/>
+														</td>
+											<td class="cargoFuncionario">
+											<input type="text" class="form-control" name="cargoFuncionario" id="cargoFuncionario" readonly>
+											</td>
+											<td class="">
+											<input type="checkbox" class="form-control checkboxCafe" id="checkboxCafe" name="checkboxCafe" onchange="changeAutorizarCheckbox(this)" />
+											<input type="hidden" class=' form-control hidden_checkboxCafe' name="hidden_checkboxCafe" id="hidden_checkboxCafe">
+											</td>
+											<td class="">
+											<input type="checkbox" class="form-control checkboxAlmoco" id="checkboxAlmoco" name="checkboxAlmoco" onchange="changeAutorizarCheckbox(this)" />
+											<input type="hidden" class='form-control hidden_checkboxAlmoco' name="hidden_checkboxAlmoco" id="hidden_checkboxAlmoco">
+											</td>
+											<td class="">
+											<input type="checkbox" class="form-control checkboxAlmocoPequeno" id="checkboxAlmocoPequeno" name="checkboxAlmocoPequeno" onchange="changeAutorizarCheckbox(this)" />
+											<input type="hidden" class='form-control hidden_checkboxAlmocoPequeno' name="hidden_checkboxAlmocoPequeno" id="hidden_checkboxAlmocoPequeno">
+											</td>
+											<td class="">
+											<input type="checkbox" class="form-control checkboxJantar" id="checkboxJantar" name="checkboxJantar" onchange="changeAutorizarCheckbox(this)" />
+											<input type="hidden" class='form-control hidden_checkboxJantar' name="hidden_checkboxJantar" id="hidden_checkboxJantar">
+											</td>
+											<td class="">
+											<input type="checkbox" class="form-control checkboxJantarPequeno" id="checkboxJantarPequeno" name="checkboxJantarPequeno" onchange="changeAutorizarCheckbox(this)" />
+											<input type="hidden" class='form-control hidden_checkboxJantarPequeno' name="hidden_checkboxJantarPequeno" id="hidden_checkboxJantarPequeno">
+											</td>
+											<td class="sr-only">
+											<input type="checkbox" class="form-control checkboxAgua" id="checkboxAgua" name="checkboxAgua" onchange="changeAutorizarCheckbox(this)" />
+											<input type="hidden" class='form-control hidden_checkboxAgua' name="hidden_checkboxAgua" id="hidden_checkboxAgua">
+											</td>
+											<td class="vlrVoucher">
+											<input type="text" class="form-control fs-text-right" name="vlrVoucher" id="vlrVoucher" value='0,00' readonly>
+											</td>
+											<td class="sr-only">
+												<input type="text" name="vlrVoucherDesconto" id="vlrVoucherDesconto" class="form-control moeda somaDescontoFunc" >	
+											</td>
+											<td class="sr-only">
+												<input type="text" name="vlrVoucherAcrescimo" id="vlrVoucherAcrescimo" class="form-control moeda somaAcrescimoFunc" >	
+											</td>
+											<td>
+												<input type="text" name="localEntrega" id="localEntrega" class="form-control">	
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="row">
+								<div class="col-md-2">
+								<div class="botaoAddFuncionario">
+									<button type="button" id="loading-example-btn" class="btn btn-primary" name="botaoAddFuncionario" id="botaoAddFuncionario">i18n.translate("text.botaoAddFuncionario")</button>
+								</div>
+								</div>			
+								<!-- 													
+								<div class="col-md-2 fileCSV" >
+									<label class="btn btn-primary pull-right" id="btn-fileCSV"> i18n.translate("text.arquivoFunc")
+									<input type="file" id="fileCSV" name="fileCSV" class="" style="display: none;"></label>
+								</div>
+								<div class="col-md-1 text-center fileCSV">
+									<label>Modelo .CSV</label><a href="Modelo_WADMO01_Funcionarios.csv"><i class="flaticon flaticon-documents icon-xl"></i></a>
+								</div>
+								-->
+								<div class="col-md-7" >
+								</div>
+								<div class="col-md-2 sr-only">
+								<div class="form-group">
+									<label for="valorTotaldescFunc">i18n.translate("text.valorTotaldescFunc")</label>
+									<input type="text" class="form-control" name="valorTotaldescFunc" id="valorTotaldescFunc" value='0' readonly>
+								</div>
+								</div>
+								<div class="col-md-2 sr-only">
+								<div class="form-group">
+									<label for="valorTotalAcrescFunc">i18n.translate("text.valorTotalAcrescFunc")</label>
+									<input type="text" class="form-control" name="valorTotalAcrescFunc" id="valorTotalAcrescFunc" value='0' readonly>
+								</div>
+								</div>
+								<div class="col-md-2">
+								<div class="form-group">
+									<label for="valorTotalSoma">i18n.translate("text.valorTotalSoma")</label>
+									<input type="text" class="form-control fs-text-right" name="valorTotalSoma" id="valorTotalSoma" value='0' readonly>
+								</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+
+		
+		<div class="panel divTabelaTerceirosProgramados" style="overflow-x: scroll; width: 100%">
+				<div class="panel-heading ">
+					<h3 class="panel-title">
+						<b>i18n.translate("text.TerceirosProgramados")</b>
+					</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12 form-group">
+								<table  class=" fs-no-border table table-striped" style="table-layout: fixed; min-width:1900px"
+									tablename="tablenameTerceiros" noaddbutton="true"
+									name="tablenameTerceiros" nodeletebutton="true"
+									id="tablenameTerceiros"
+									customfndelete="fnCustomDelete(this, 'tablenameTerceiros')">
+									<thead>
+										<tr>
+											<th style="width: 3%;" class=""></th>
+											<th style="width: 3%;" class="buttaoDelete"></th>
+											<th style="width: 15%;" class="cpfTerceiro required"><label for="cpfTerceiro">i18n.translate("text.cpfTerceiro")</label></th>
+											<th style="width: 25%;" class="nomeEmpresaTerceiro required"><label for="nomeEmpresaTerceiro">i18n.translate("text.nomeEmpresaTerceiro")</label></th>
+											<th style="width: 5%;" class="">
+											<label for="checkboxCafeTerc">i18n.translate("text.checkboxCafe")</label>
+											<div class="switch switch-success classSelectAllCafeTerc">
+											    <input class="switch-input classSelectAllCafeTerc" name="selectAllCafeTerc" type="checkbox" id="selectAllCafeTerc" onclick="autorizarCafeTerc(this)" />
+											    <label class="switch-button classSelectAllCafeTerc" for="selectAllCafeTerc"></label>
+								            </div>
+											</th>
+											<th style="width: 5%;" class="">
+											<label for="checkboxAlmocoTerc">i18n.translate("text.checkboxAlmoco")</label>
+											<div class="switch switch-success classSelectAllAlmocoTerc">
+											    <input class="switch-input classSelectAllAlmocoTerc" name="selectAllAlmocoTerc" type="checkbox" id="selectAllAlmocoTerc" onclick="autorizarAlmocoTerc(this)" />
+											    <label class="switch-button classSelectAllAlmocoTerc" for="selectAllAlmocoTerc"></label>
+								            </div>
+								            </th>
+								            <th style="width: 5%;" class="">
+											<label for="checkboxAlmocoTercPeq">i18n.translate("text.checkboxAlmocoPequeno")</label>
+											<div class="switch switch-success classSelectAllAlmocoTercPeq">
+											    <input class="switch-input classSelectAllAlmocoTercPeq" name="selectAllAlmocoTercPeq" type="checkbox" id="selectAllAlmocoTercPeq" onclick="autorizarAlmocoTercPeq(this)" />
+											    <label class="switch-button classSelectAllAlmocoTercPeq" for="selectAllAlmocoTercPeq"></label>
+								            </div>
+								            </th>
+											<th style="width: 5%;" class="">
+											<label for="checkboxJantarTerc">i18n.translate("text.checkboxJantar")</label>
+											<div class="switch switch-success classSelectAllJantarTerc">
+											    <input class="switch-input classSelectAllJantarTerc" name="selectAllJantarTerc" type="checkbox" id="selectAllJantarTerc" onclick="autorizarJantarTerc(this)" />
+											    <label class="switch-button classSelectAllJantarTerc" for="selectAllJantarTerc"></label>
+								            </div>
+											</th>
+											<th style="width: 5%;" class="">
+											<label for="checkboxJantarTercPeq">i18n.translate("text.checkboxJantarPequeno")</label>
+											<div class="switch switch-success classSelectAllJantarTercPeq">
+											    <input class="switch-input classSelectAllJantarTercPeq" name="selectAllJantarTercPeq" type="checkbox" id="selectAllJantarTercPeq" onclick="autorizarJantarTercPeq(this)" />
+											    <label class="switch-button classSelectAllJantarTercPeq" for="selectAllJantarTercPeq"></label>
+								            </div>
+											</th>
+											<th style="width: 5%;" class="sr-only">
+											<label for="checkboxAguaTerc">i18n.translate("text.checkboxAgua")</label>
+											<div class="switch switch-success classSelectAllAguaTerc">
+											    <input class="switch-input classSelectAllAguaTerc" name="selectAllAguaTerc" type="checkbox" id="selectAllAguaTerc" onclick="autorizarAguaTerc(this)" />
+											    <label class="switch-button classSelectAllAguaTerc" for="selectAllAguaTerc"></label>
+								            </div>
+											</th>
+											<th style="width: 10%;" class="vlrVoucherTerc">
+											<label for="vlrVoucherTerc"  class="vlrVoucherTerc fs-text-right">i18n.translate("text.vlrVoucher")</label>
+											</th>
+											<th style="width: 10%;" class="vlrVoucherDescontoTerc sr-only">
+											<label for="vlrVoucherDescontoTerc"  class="vlrVoucherDescontoTerc">i18n.translate("text.vlrVoucherDesconto")</label>
+											</th>
+											<th style="width: 10%;" class="vlrVoucherAcrescimoTerc sr-only">
+											<label for="vlrVoucherAcrescimoTerc"  class="vlrVoucherAcrescimoTerc">i18n.translate("text.vlrVoucherAcrescimo")</label>
+											</th>
+											<th style="width: 20%;" class="localEntregaTerc">
+											<label for="localEntregaTerc"  class="localEntregaTerc">i18n.translate("text.localEntrega")</label>
+											</th>
+										</tr>
+										</thead>
+									<tbody>
+										<tr>
+										<td class="indiceLinhaTerc" id="indiceLinhaTerc"></td>
+										<td class="buttaoDeleteTerc"><input type="button" name="buttaoDeleteTerc" id="buttaoDeleteTerc" class="lixeiraCustomizada" onclick="fnCustomDelete(this);"/></td>
+											
+											<td class="cpfTerceiro">
+														<input type="text" id="cpfTerceiro" name="cpfTerceiro" class="form-control cpf"/>
+														<input type="hidden" name="hidden_indexTerceiro" id="hidden_indexTerceiro"/>
+														<input type="hidden" name="hidden_CPF_TERC" id="hidden_CPF_TERC"/>
+														<input type="hidden" name="hidden_CARTAO_REFEIC" id="hidden_CARTAO_REFEIC"/>
+														</td>
+											<td class="nomeEmpresaTerceiro">
+											<input type="text" class="form-control" name="nomeEmpresaTerceiro" id="nomeEmpresaTerceiro">
+											</td>
+											<td class="">
+											<input type="checkbox" class="form-control checkboxCafeTerc" id="checkboxCafeTerc" name="checkboxCafeTerc" onchange="changeAutorizarCheckboxTerc(this)" />
+											<input type="hidden" class=' form-control hidden_checkboxCafeTerc' name="hidden_checkboxCafeTerc" id="hidden_checkboxCafeTerc">
+											</td>
+											<td class="">
+											<input type="checkbox" class="form-control checkboxAlmocoTerc" id="checkboxAlmocoTerc" name="checkboxAlmocoTerc" onchange="changeAutorizarCheckboxTerc(this)" />
+											<input type="hidden" class='form-control hidden_checkboxAlmocoTerc' name="hidden_checkboxAlmocoTerc" id="hidden_checkboxAlmocoTerc">
+											</td>
+											<td class="">
+											<input type="checkbox" class="form-control checkboxAlmocoTercPeq" id="checkboxAlmocoTercPeq" name="checkboxAlmocoTercPeq" onchange="changeAutorizarCheckboxTerc(this)" />
+											<input type="hidden" class='form-control hidden_checkboxAlmocoTercPeq' name="hidden_checkboxAlmocoTercPeq" id="hidden_checkboxAlmocoTercPeq">
+											</td>
+											<td class="">
+											<input type="checkbox" class="form-control checkboxJantarTerc" id="checkboxJantarTerc" name="checkboxJantarTerc" onchange="changeAutorizarCheckboxTerc(this)" />
+											<input type="hidden" class='form-control hidden_checkboxJantarTerc' name="hidden_checkboxJantarTerc" id="hidden_checkboxJantarTerc">
+											</td>
+											<td class="">
+											<input type="checkbox" class="form-control checkboxJantarTercPeq" id="checkboxJantarTercPeq" name="checkboxJantarTercPeq" onchange="changeAutorizarCheckboxTerc(this)" />
+											<input type="hidden" class='form-control hidden_checkboxJantarTercPeq' name="hidden_checkboxJantarTercPeq" id="hidden_checkboxJantarTercPeq">
+											</td>
+											<td class="sr-only">
+											<input type="checkbox" class="form-control checkboxAguaTerc" id="checkboxAguaTerc" name="checkboxAguaTerc" onchange="changeAutorizarCheckboxTerc(this)" />
+											<input type="hidden" class='form-control hidden_checkboxAguaTerc' name="hidden_checkboxAguaTerc" id="hidden_checkboxAguaTerc">
+											</td>
+											<td class="vlrVoucherTerc">
+											<input type="text" class="form-control fs-text-right" name="vlrVoucherTerc" id="vlrVoucherTerc" value='0,00' readonly></td>
+											<td class="sr-only">
+												<input type="text" name="vlrVoucherDescontoTerc" id="vlrVoucherDescontoTerc" class="form-control moeda somaDescontoTerc">	
+											</td>
+											<td class="sr-only">
+												<input type="text" name="vlrVoucherAcrescimoTerc" id="vlrVoucherAcrescimoTerc" class="form-control moeda somaAcrescimoTerc" >	
+											</td>
+											<td>
+												<input type="text" name="localEntregaTerc" id="localEntregaTerc" class="form-control">	
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<div class="row">
+								<div class="col-md-2">
+								<div class="botaoAddTerceiro">
+									<button type="button" id="loading-example-btn" class="btn btn-primary" name="botaoAddTerceiro" id="botaoAddTerceiro">i18n.translate("text.botaoAddTerceiro")</button>
+								</div>
+								
+
+								</div>
+								<!-- 
+								<div class="col-md-2 fileCSVTerc" >
+									<label class="btn btn-primary pull-right" id="btn-fileCSVTerc"> i18n.translate("text.arquivoTerc")
+									<input type="file" id="fileCSVTerc" name="fileCSVTerc" class="" style="display: none;"></label>
+								</div>
+								<div class="col-md-1 text-center fileCSVTerc">
+									<label>Modelo .CSV</label><a href="Modelo_WADMO01_Terceiros.csv"><i class="flaticon flaticon-documents icon-xl"></i></a>
+								</div>
+								-->
+								<div class="col-md-7" >
+								</div>
+								
+								<div class="col-md-2 sr-only">
+								<div class="form-group">
+									<label for="valorTotaldescTerc">i18n.translate("text.valorTotaldescTerc")</label>
+									<input type="text" class="form-control" name="valorTotaldescTerc" id="valorTotaldescTerc" value='0' readonly>
+								</div>
+								</div>
+								<div class="col-md-2 sr-only">
+								<div class="form-group">
+									<label for="valorTotalAcrescTerc">i18n.translate("text.valorTotalAcrescTerc")</label>
+									<input type="text" class="form-control" name="valorTotalAcrescTerc" id="valorTotalAcrescTerc" value='0' readonly>
+								</div>
+								</div>
+								<div class="col-md-2">
+								<div class="form-group">
+									<label for="valorTotalSomaTerc">i18n.translate("text.valorTotalSomaTerc")</label>
+									<input type="text" class="form-control fs-text-right" name="valorTotalSomaTerc" id="valorTotalSomaTerc" value='0' readonly>
+								</div>
+								</div>
+							</div>
+						</div>
+				</div>
+			</div>
+		</div>
+		
+		
+<div class="container-fluid divAprovExecucao" style="display:none;">
+				<div class="panel panel-default ">
+					<div class="panel-heading">
+						<h3 class="panel-title">
+							<b>i18n.translate("text.aprovExecucao")</b>
+						</h3>
+					</div>
+					<div class="panel-body">
+					<!-- 
+						<div class="row">
+							<h5 class="atencaoVermelho">
+								<b class="atencaoVermelho">i18n.translate("text.Aviso")</b>
+							</h5>
+						</div>
+					 -->
+						<div class="row">
+							<div class="col-md-4 col-sm-6">
+								<label class="required">
+									i18n.translate("text.aprovacao") </label> <select
+									name="aprovacao" id="aprovacao" class="form-control">
+									<option value="">i18n.translate("text.selecionar")</option>
+									<option value="sim">i18n.translate("text.sim")</option>
+									<option value="nao">i18n.translate("text.nao")</option>
+								</select>
+								<input type=hidden name="hidden_aprovacao"id="hidden_aprovacao" />
+							</div>
+							<div class="col-md-4 col-sm-6">
+								<label for="nomeAprovador">
+									i18n.translate("text.nomeAprovador") </label> <input type="text"
+									class="form-control" name="nomeAprovador"
+									id="nomeAprovador" readonly="readonly" />
+							</div>
+							<div class="col-md-4 col-sm-6">
+								<label for="dataAprovacao">
+									i18n.translate("text.dataAprovacao") </label>
+								<div class="input-group enable-calendar" data-calendar="">
+									<input type="text" class="form-control" id="dataAprovacao"
+										name="dataAprovacao" placeholder="00/00/0000"
+										readonly="readonly" /> <span
+										class="input-group-addon fs-cursor-pointer"> <span
+										class="fluigicon fluigicon-calendar"> </span>
+									</span>
+								</div>
+							</div>
+							<div class="col-md-12 col-sm-12">
+								<br> <label class="" for="justificativaAprov">
+									i18n.translate("text.justificativaAprov") </label>
+								<textarea class="form-control" name="justificativaAprov"
+									id="justificativaAprov"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+</html>

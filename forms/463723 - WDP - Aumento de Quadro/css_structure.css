@@ -1,0 +1,150 @@
+.corDeFundo {
+	background-color: #00BFFF;
+}
+
+.corDoTitulo {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+
+.lixeiraCustomizada {
+	background: transparent;
+	background-image: url("lixeira.png");
+	background-repeat: no-repeat;
+	background-position: center top;
+	border: 0px;
+	cursor: pointer;
+	padding-top: 35px;
+	width: 28px;
+	height: 44px;
+	color: darkgrey;
+}
+
+.posicionamentoNaoI {
+	position: relative;
+	right: -12px;
+}
+.posicionamentoNaoL {
+	position: relative;
+	right: -15px;
+}
+.lixeiraCustomizada1 {
+	background: transparent;
+	background-image: url("lixeira.png");
+	background-repeat: no-repeat;
+	background-position: center top;
+	border: 0px;
+	cursor: pointer;
+	/*width:52px;
+	height:52px;*/
+	padding-top: 35px;
+	width: 28px;
+	height: 44px;
+	color: darkgrey;
+}
+
+.fluig-style-guide .has-error .select2-selection {
+	border-color: #a94442;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+}
+
+.logo {
+	background: transparent;
+	background-image: url("csc.png");
+	background-repeat: no-repeat;
+	position: relative;
+	top: 19px;
+	background-position: bottom;
+	width: 32%;
+	height: 32px;
+}
+
+.checkcustomizado {
+	width: 120px;
+	height: 23px;
+	cursor: pointer;
+	position: absolute;
+	top: -8px;
+	left: 0;
+	background: #fcfff4;
+}
+
+.adicionarScroll {
+	overflow: auto;
+}
+
+.adicionarAlturaLargura {
+	width: 120%;
+}
+
+.required:after {
+	content: " *";
+	color: red;
+}
+
+.corFundoDescricao {
+	color: red;
+	padding: 10px;
+}
+
+.bordaDIV {
+	border: 1px solid;
+	border-color: #eeeeee;
+	border-radius: 10px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover, .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btFinalizarRateio {
+	float: right;
+}
+
+.btCancelarRateio {
+	float: right;
+	padding-left: 10px;
+}
+
+.tbIndicacao {
+	border-spacing: 2px;	
+}
+
+.centralizar {
+	text-align:center;
+}
+
+.checkboxDeficiencia {
+    transform: scale(1.5);
+}
+
+.checkboxSituacao {
+    transform: scale(2);
+}
+
+.checkboxConferido {
+    transform: scale(2);
+}
+
+.checkboxNa {
+    transform: scale(2);
+}
+
+input[readonly]{
+    opacity: 1 !important;
+    background-color: #f2f2f2 !important;
+}
+
+.alertTable th, .alertTable td{
+  color: white !important;
+}
